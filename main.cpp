@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 using std::string;
+using std::cout;
 
 struct Produs {
     string numeProdus;
@@ -15,6 +16,7 @@ Produs* HEAD; // Va pointa catre capul de lista
 int codProdusCounter = 1; // Pe asta il vom incrementa inainte sa adaugam un produs nou si il vom asigna catre codProdus pentru produsul nou.
 
 void AfisareProduse(){
+    cout << "Produs";
     //Parcurgem lista de produse.
     //Afisam informatiile produselor intr-un tabel.
 };
