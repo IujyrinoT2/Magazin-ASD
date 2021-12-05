@@ -1,10 +1,6 @@
-/* Să se scrie un program care simuleaza un magazine online, folosind ca implementare o lista simplu inlantuita.
-Fiecare produs din magazin va fi reprezentat printr-un nod in lista pentru care se cunoaste numele produsului,
-un cod de trei cifre al produsului, pretul pe bucata, numarul de bucati aflate pe stoc. Utilizatorul va trebui sa poata
-vizualiza toate produsele, sa poata cauta un produs in lista si sa afiseze pentru acest produs toate informatiile,
-sa poata cumpara un produs (numarul de bucati aflate pe stoc va fi scazut; daca se ajunge la 0 bucati,
-produsul respective trebuie sters din lista), sa poata introduce un produs in lista (cu toate informatiile). */
-
+#include <iostream>
+#include <string>
+using std::string;
 
 struct Produs {
     string numeProdus;
@@ -14,7 +10,7 @@ struct Produs {
     Produs* next;
 };
 
-Produs* HEAD // Va pointa catre capul de lista
+Produs* HEAD; // Va pointa catre capul de lista
 
 int codProdusCounter = 1; // Pe asta il vom incrementa inainte sa adaugam un produs nou si il vom asigna catre codProdus pentru produsul nou.
 
@@ -61,7 +57,3 @@ void StergeProdus(int codProdus){
 int main(){
     //Aici vom face meniul.
 }
-
-
-//Catalin was here
-
