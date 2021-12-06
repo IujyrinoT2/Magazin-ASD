@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 using std::string;
+using std::cout;
 
 struct Produs {
     string numeProdus;
@@ -49,8 +50,28 @@ void AdaugareProdus(){
 }
 
 void StergeProdus(int codProdus){
-    //Chemam CautareProdus(codProdus)
-    //Stergem produsul si refacem legaturile listei inlantuite
+    Produs *p = CautareProdus(codProdus);
+
+    if(p == nullptr) {                                              //  Cand nu s-a gasit produsul, functia se opreste
+        cout << "Produsul nu s-a gasit";
+        return;
+    }
+
+    Produs* p_aux = p;
+
+    if(HEAD == p) {                                                 // Stergerea cand produsul este primul element
+        p = p->next;
+        HEAD = p;
+        delete p_aux;
+        return;
+    }
+
+    int codProdusAnterior = codProdus - 1;
+    while((p = CautareProdus(codProdusAnterior)) == nullptr)       // Gasirea produsului anterior care are cod valid in caz
+        codProdusAnterior--;                                       // ca au mai fost facute stergeri
+
+    p->next = (p->next)->next;                                     // Stergerea produsului in celelalte cazuri
+    delete p_aux;                                                  // si refacearea legaturilor
 }
 
 
