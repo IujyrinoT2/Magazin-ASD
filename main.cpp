@@ -94,10 +94,38 @@ void AdaugareProdus(){
     //codProdus va lua valoarea lui codProdusCounter.
     //Incrementam codProdusCounter.
 }
+void citireLista(int n) {
+    Produs *q = new Produs;
+    int codnou = 0;
+    for(int i = 0; i < n; i++) {
+        Produs *p = new Produs;
+        p->codProdus = ++codnou;
+        cout << "\nnume produs: ";
+        cin >> p->numeProdus;
+        cout << "\npret produs: ";
+        cin >> p->pretProdus;
+        cout << "\ncantitate produs: ";
+        cin >> p->cantitateProdus;
 
+        p->next= nullptr;
+        if(HEAD == nullptr)
+            HEAD = p;
+        else
+            q->next= p;
+        q = p;
+    }
+}
 
 
 
 int main(){
     //Aici vom face meniul.
+    int n;
+    cout << "n = ";
+    cin >> n;
+
+    citireLista(n);
+
+
+    return 0;
 }
