@@ -2,6 +2,8 @@
 #include <string>
 using std::string;
 using std::cout;
+using std::cin;
+using std::endl;
 
 struct Produs {
     string numeProdus;
@@ -29,24 +31,9 @@ Produs* CautareProdus(int codProdus){
 void AfisareDetaliiProdus(Produs* produsCautat){
     //Va afisa toate campurile din structura produs
 }
-void CumparareProdus(int codProdus){
-    // Vom cere cantitate cumparata (citita la tastatura) - tip int
-    // Chemam validareStoc(int cantitateCumparata, CautareProdus(int codProdus)) -
-    // Vom scadea cantitatea produsului cu cantitatea cumparata
-    // Verificam daca stocul ajunge la 0, daca da, chemam StergeProdus(int codProdus)
-
-}
 
 bool ValidareStoc(int cantitateCumparata, Produs* produsCurent){
     // Verificam daca cantitateCumparata > cantitateProdus
-}
-
-
-void AdaugareProdus(){
-    //Citim numeProdus, pretProdus, cantitateProdus
-    //Verificam daca exista produsul. Daca exista, doar vom creste cantitatea.
-    //codProdus va lua valoarea lui codProdusCounter.
-    //Incrementam codProdusCounter.
 }
 
 void StergeProdus(int codProdus){
@@ -74,7 +61,43 @@ void StergeProdus(int codProdus){
     delete p_aux;                                                  // si refacearea legaturilor
 }
 
+void CumparareProdus(int codProdus){
+    Produs *p = CautareProdus(codProdus);
+    if(p == nullptr){
+        cout << "Nu s-a gasit produsul" << endl;
+        return;
+    }
+                                                                                    // Vom cere cantitate cumparata (citita la tastatura) - tip int
+    int cantitateCumparata;
+
+    do {
+        cout << "Ce cantitate doriti sa cumparati? ";
+        cin >> cantitateCumparata;
+        if(cantitateCumparata <= 0)
+            cout << "Introduceti o cantitate valida" << endl;
+    }while(cantitateCumparata <= 0);
+                                                                                    // Chemam validareStoc(int cantitateCumparata, CautareProdus(int codProdus))
+    if(!ValidareStoc(cantitateCumparata, CautareProdus(codProdus))) {
+        cout << "Stoc insuficient" << endl;
+        return;
+    }
+                                                                                    // Vom scadea cantitatea produsului cu cantitatea cumparata
+    p->cantitateProdus -= cantitateCumparata;
+                                                                                    // Verificam daca stocul ajunge la 0, daca da, chemam StergeProdus(int codProdus)
+    if(!p->cantitateProdus)
+        StergeProdus(codProdus);
+}
+
+void AdaugareProdus(){
+    //Citim numeProdus, pretProdus, cantitateProdus
+    //Verificam daca exista produsul. Daca exista, doar vom creste cantitatea.
+    //codProdus va lua valoarea lui codProdusCounter.
+    //Incrementam codProdusCounter.
+}
 
 int main(){
     //Aici vom face meniul.
+    
+
+    return 0;
 }
