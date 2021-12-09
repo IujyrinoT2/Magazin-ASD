@@ -135,7 +135,13 @@ void AdaugareProdus()
 
 void AfisareProduse()
 {
-
+    Produs *currentNode = HEAD;
+    cout << "Produsele sunt: " << endl;
+    while (currentNode != NULL)
+    {
+        AfisareDetaliiProdus(currentNode);
+        currentNode = currentNode->next;
+    }
 }
 
 void AfisareMeniu()
@@ -212,7 +218,7 @@ void AfisareMeniu()
 int main()
 {
 
-    cout <<"Buna ziua!"<<endl;
+    cout << "Buna ziua!" << endl;
     AfisareMeniu();
     return 0;
 
