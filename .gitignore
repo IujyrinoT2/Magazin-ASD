@@ -33,4 +33,4 @@
 
 # CMake
 cmake-build-debug/
-out/
+out\build\x64-Debug
