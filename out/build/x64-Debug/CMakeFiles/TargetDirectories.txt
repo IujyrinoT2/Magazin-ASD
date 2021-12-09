@@ -1,3 +1,0 @@
-D:/##Facultate/An2/Sem 1/Algoritmi si Structuri de Date/Proiect/Magazin-ASD/out/build/x64-Debug/CMakeFiles/Magazin_ASD.dir
-D:/##Facultate/An2/Sem 1/Algoritmi si Structuri de Date/Proiect/Magazin-ASD/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-D:/##Facultate/An2/Sem 1/Algoritmi si Structuri de Date/Proiect/Magazin-ASD/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
