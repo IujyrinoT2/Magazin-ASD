@@ -135,12 +135,12 @@ void AdaugareProdus()
 
 void AfisareProduse()
 {
-    Produs *currentNode = HEAD;
+    Produs *nodCrt = HEAD;
     cout << "Produsele sunt: " << endl;
-    while (currentNode != NULL)
+    while (nodCrt != NULL)
     {
-        AfisareDetaliiProdus(currentNode);
-        currentNode = currentNode->next;
+        AfisareDetaliiProdus(nodCrt);
+        nodCrt = nodCrt->next;
     }
 }
 
