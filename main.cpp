@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
 #include <iomanip> //Folosit pentru afisare sub forma de tabel
+#include "single_include/tabulate/tabulate.hpp"
 
 using namespace std;
+using namespace tabulate;
 
 struct Produs
 {
@@ -47,22 +49,22 @@ void AfisareDetaliiProdus(Produs *produsCautat)
     const char separator = ' ';
     const int lungimeCategorie = 20; //Asta este numarul maxim de caractere care va fi afisat (include spatiile)
     //Numele coloanelor VV
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Cod Produs";
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Nume Produs";
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Cantitate Produs";
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Pret Produs" << std::endl;
+    cout << left << std::setw(lungimeCategorie) << setfill(separator) << "Cod Produs";
+    cout << left << std::setw(lungimeCategorie) << setfill(separator) << "Nume Produs";
+    cout << left << std::setw(lungimeCategorie) << setfill(separator) << "Cantitate Produs";
+    cout << left << std::setw(lungimeCategorie) << setfill(separator) << "Pret Produs" << endl;
 
     //Continutul liniei VV
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->codProdus;
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->numeProdus;
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->cantitateProdus;
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->pretProdus
-              << std::endl;
+    cout << left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->codProdus;
+    cout << left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->numeProdus;
+    cout << left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->cantitateProdus;
+    cout << left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->pretProdus << endl;
 }
 
 bool ValidareStoc(int cantitateCumparata, Produs *produsCurent)
 {
     // Verificam daca cantitateCumparata > cantitateProdus
+    return true; // Am pus asta temporar - pentru a nu mai vedea warningul
 }
 
 void StergeProdus(int codProdus)
@@ -144,82 +146,105 @@ void AfisareProduse()
     }
 }
 
-void AfisareMeniu()
+void OptiuneUtilizator(int userInput)
 {
-    int userInput;
-    cout << "Optiuni: " << endl;
-    cout << "1. Adaugare produs." << endl;
-    cout << "2. Stergere produs." << endl;
-    cout << "3. Afisare detalii produs." << endl;
-    cout << "4. Cumparare produs." << endl;
-    cout << "5. Afisare produse." << endl;
-    cout << "0. Iesire din program." << endl;
-    cout << "Introduceti numarul actiunii dorite: " << endl;
-    cin >> userInput;
-
-    switch (userInput)
+    while (userInput)
     {
-        case 1: //Adaugare produs
+        cout << "Introduceti numarul actiunii dorite: ";
+        cin >> userInput;
+        cout << endl;
+        switch (userInput)
         {
-            AdaugareProdus();
-            cout << endl;
-            AfisareMeniu();
-        }
-            break;
-        case 2: //Stergere produs
-        {
-            int codProdus;
-            cout << "Introduceti codul produsului pe care doriti sa il stergeti: " << endl;
-            cin >> codProdus;
-            StergeProdus(codProdus);
-            cout << endl;
-            AfisareMeniu();
-        }
-            break;
-        case 3: //Afisare detalii produs
-        {
-            int codProdus;
-            cout << "Introduceti codul produsului pentru care doriti afisarea detaliilor: " << endl;
-            cin >> codProdus;
-            AfisareDetaliiProdus(CautareProdus(codProdus));
-            cout << endl;
-            AfisareMeniu();
-        }
-            break;
-        case 4: //Cumparare produs
-        {
-            int codProdus;
-            cout << "Introduceti codul produsului pe care doriti sa il achizitionati:  " << endl;
-            CumparareProdus(codProdus);
-            cout << endl;
-            AfisareMeniu();
-        }
-            break;
-        case 5: //Afisare produse
-        { ;
-            AfisareProduse();
-            cout << endl;
-            AfisareMeniu();
-        }
-            break;
-        case 0: //Iesire din program
-        {
-            cout << "La revedere!" << endl;
-        }
-            break;
-        default:
-        {
-            cout << "Valoarea introdusa este invalida." << endl;
-            AfisareMeniu();
+            case 1: //Adaugare produs
+            {
+                AdaugareProdus();
+                cout << endl;
+            }
+                break;
+            case 2: //Stergere produs
+            {
+                int codProdus;
+                cout << "Introduceti codul produsului pe care doriti sa il stergeti: " << endl;
+                cin >> codProdus;
+                StergeProdus(codProdus);
+                cout << endl;
+            }
+                break;
+            case 3: //Afisare detalii produs
+            {
+                int codProdus;
+                cout << "Introduceti codul produsului pentru care doriti afisarea detaliilor: " << endl;
+                cin >> codProdus;
+                AfisareDetaliiProdus(CautareProdus(codProdus));
+                cout << endl;
+            }
+                break;
+            case 4: //Cumparare produs
+            {
+                int codProdus;
+                cout << "Introduceti codul produsului pe care doriti sa il achizitionati:  " << endl;
+                CumparareProdus(codProdus);
+                cout << endl;
+            }
+                break;
+            case 5: //Afisare produse
+            { ;
+                AfisareProduse();
+                cout << endl;
+            }
+                break;
+            case 0: //Iesire din program
+            {
+                cout << "La revedere!" << endl;
+            }
+                break;
+            default:
+            {
+                cout << "Valoarea introdusa este invalida." << endl;
+            }
         }
     }
 }
 
+void AfisareMeniu()
+{
+    int userInput;
+    Table tabelMeniu;
+    tabelMeniu.add_row({"ID", "OPTIUNE", "DESCRIERE OPTIUNE"});
+    tabelMeniu.add_row({"1", "Adaugare un produs", "Vom adauga un produs. Codul produsul este generat automat."});
+    tabelMeniu.add_row({"2", "Sergere un produs", "Se introduce codul produsului pe care doriti sa il stergeti."});
+    tabelMeniu.add_row({"3", "Afisare detalii pentru un produs",
+                        "Se introduce codul produsului al carui detalii va intereseaza."});
+    tabelMeniu.add_row(
+            {"4", "Cumparare un produs", "Se introduce codul produsului pe care doriti sa il achizitionati."});
+    tabelMeniu.add_row({"5", "Afisare lista produse", "Se vor afisa toate produsele din stoc."});
+    tabelMeniu.add_row({"0", "Iesire din program", "Se va iesi din program."});
+    tabelMeniu.format()
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_bottom_left("*")
+            .corner_bottom_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .corner_bottom_left_color(Color::red)
+            .corner_bottom_right_color(Color::red)
+            .font_align(FontAlign::center)
+            .font_color(Color::cyan)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan);
+    cout << tabelMeniu << endl;
+    OptiuneUtilizator(userInput);
+}
+
 int main()
 {
-
     cout << "Buna ziua!" << endl;
     AfisareMeniu();
     return 0;
-
 }
