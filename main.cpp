@@ -464,6 +464,7 @@ void OptiuneUtilizator(int userInput)
             {
                 int codProdus;
                 cout << "Introduceti codul produsului pe care doriti sa il achizitionati:  " << endl;
+                cin >> codProdus;
                 CumparareProdus(codProdus);
                 cout << endl;
             }
