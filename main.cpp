@@ -1,22 +1,4 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <iomanip> //Folosit pentru afisare sub forma de tabel
-#include "single_include/tabulate/tabulate.hpp"
-
-//Hey asta va fi main
-
-using namespace std;
-using namespace tabulate;
-
-struct Produs
-{
-    string numeProdus;
-    int codProdus;
-    float pretProdus;//Era float dar arata urat la afisare
-    int cantitateProdus;
-    Produs *next;
-};
+#include "Produs.h"
 
 Produs *HEAD; // Va pointa catre capul de lista
 int codProdusCounter = 1; // Pe asta il vom incrementa inainte sa adaugam un produs nou si il vom asigna catre codProdus pentru produsul nou.
@@ -33,7 +15,7 @@ void AdaugareProdus()
     double pretProdusNou;
     int cantitateProdusNou;
 
-    cout << "Pentru adaugare produs nou, apasati tasta 1."<< endl;
+    cout << "Pentru adaugare produs nou, apasati tasta 1." << endl;
     cout << "Pentru un produs deja existent apasati tasta 2." << endl;
     cin >> optiune;
     Produs *p = new Produs;
@@ -526,15 +508,32 @@ void AfisareMeniu()
 {
     int userInput;
     Table tabelMeniu;
-    tabelMeniu.add_row({"ID", "OPTIUNE", "DESCRIERE OPTIUNE"});
-    tabelMeniu.add_row({"1", "Adaugare un produs", "Vom adauga un produs. Codul produsul este generat automat."});
-    tabelMeniu.add_row({"2", "Stergere un produs", "Se introduce codul produsului pe care doriti sa il stergeti."});
-    tabelMeniu.add_row({"3", "Afisare detalii pentru un produs",
-                        "Se introduce codul produsului al carui detalii va intereseaza."});
-    tabelMeniu.add_row(
-            {"4", "Cumparare un produs", "Se introduce codul produsului pe care doriti sa il achizitionati."});
-    tabelMeniu.add_row({"5", "Afisare lista produse", "Se vor afisa toate produsele din stoc."});
-    tabelMeniu.add_row({"0", "Iesire din program", "Se va iesi din program."});
+    tabelMeniu.add_row({"ID", "OPTIUNE"});
+    tabelMeniu.add_row({"1", "Adaugare un produs"});
+    tabelMeniu.add_row({"2", "Stergere un produs"});
+    tabelMeniu.add_row({"3", "Afisare detalii pentru un produs"});
+    tabelMeniu.add_row({"4", "Cumparare un produs"});
+    tabelMeniu.add_row({"5", "Afisare lista produse"});
+    tabelMeniu.add_row({"0", "Iesire din program"});
+    tabelMeniu[0].format()
+            .font_color(Color::green)
+            .font_align(FontAlign::center)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan)
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_bottom_left("*")
+            .corner_bottom_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .corner_bottom_left_color(Color::red)
+            .corner_bottom_right_color(Color::red);
     tabelMeniu.format()
             .corner_top_left("*")
             .corner_top_right("*")
