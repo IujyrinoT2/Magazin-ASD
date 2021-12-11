@@ -1,4 +1,4 @@
-#include "Produs.h"
+#include "Lista.h"
 
 Produs *HEAD; // Va pointa catre capul de lista
 int codProdusCounter = 1; // Pe asta il vom incrementa inainte sa adaugam un produs nou si il vom asigna catre codProdus pentru produsul nou.
