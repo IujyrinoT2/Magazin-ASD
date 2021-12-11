@@ -33,7 +33,8 @@ void AdaugareProdus()
     double pretProdusNou;
     int cantitateProdusNou;
 
-    cout << "Pentru adaugare produs nou, apasati tasta 1. Pentru produs existent apasati tasta 2." << endl;
+    cout << "Pentru adaugare produs nou, apasati tasta 1."<< endl;
+    cout << "Pentru un produs deja existent apasati tasta 2." << endl;
     cin >> optiune;
     Produs *p = new Produs;
     if (optiune == 1)
@@ -559,7 +560,6 @@ void AfisareMeniu()
 
 int main()
 {
-    cout << "Buna ziua!" << endl;
     AfisareMeniu();
     return 0;
 }
