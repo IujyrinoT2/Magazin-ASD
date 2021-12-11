@@ -1,0 +1,39 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			//"taskName": "build",
+			"type": "cppbuild",
+			"label": "C/C++: cpp.exe build active file",
+			"command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+			"args": ["-g3","-Wall", "${file}","-o","${fileDirname}\\${fileBasenameNoExtension}.exe"],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [	"$gcc"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: C:\\msys64\\mingw64\\bin\\g++.exe"
+		},
+		{
+			//"taskName": "build",
+			"type": "shell",
+			"label": "Run this C Program",
+			"command": "C:\\msys64\\mingw64\\bin\\g++.exe -g -Wall \"${file}\" -o \"${fileDirname}\\${fileBasenameNoExtension}.exe\" &&\"${fileDirname}\\${fileBasenameNoExtension}.exe\"",
+			//"isBuildCommand": true,
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [	"$gcc"],
+			"detail": "compiler: C:\\msys64\\mingw64\\bin\\g++.exe"
+		}
+		//{
+		//	"taskName": "run",
+		//	"command": "PoerShell",
+		//	"args": ["${fileDirname}\\${fileBasenameNoExtension}.exe"],
+		//	"isTestCommand": true
+		//}
+	]
+}
