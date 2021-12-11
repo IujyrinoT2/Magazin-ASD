@@ -60,15 +60,16 @@ void AdaugareProdus()
         cout << "Introudceti cantitatea produsului: " << endl;
         cin >> cantitateProdusNou;
         p->cantitateProdus = cantitateProdusNou;
+        p->next = nullptr;
         if (HEAD == nullptr)
         {
             HEAD = p;
-            p->next = nullptr;
             cout << endl << "Noul produs a fost adaugat cu succes! ";
             return;
         }
-        p->next = HEAD;
-        HEAD = p;
+        Produs *iter = HEAD;
+        for(; iter->next != nullptr; iter = iter->next);
+        iter->next = p;
         cout << endl << "Noul produs a fost adaugat cu succes! ";
         return;
     } else if (optiune == 2)
@@ -157,42 +158,27 @@ void StergeProdus(int codProdusPrimit)
     Produs *p = CautareProdus(codProdusPrimit);
 
     if (p == nullptr)
-    {                                              //  Cand nu s-a gasit produsul, functia se opreste
-        cout << "Produsul nu s-a gasit";
         return;
-    }
-
-    cout << "### test produs gasit ###\n";
-    cout << p->codProdus << " : " << p->numeProdus;
-    cout << "### test HEAD ###\n";
-    cout << HEAD->codProdus << " : " << HEAD->numeProdus;
-
-
 
     Produs *p_aux = p;
+
+    for(int i = 0; i < n; i++)
+        if(vectcodProd[i] == codProdusPrimit) {
+            vectcodProd[i] = 0;
+        }
 
     if (HEAD == p)
     {                                                 // Stergerea cand produsul este primul element
         p = p->next;
         HEAD = p;
         delete p_aux;
-        vectcodProd[0] = 0;
-        cout << "###Se sterge primul element###\n";    //Codul Produsului care va fi sters va fi marcat cu 0;
-        for(int i = 0; i < 10; i++)
-            cout << vectcodProd[i] << " ";
         return;
     }
 
-    int indexVector = 0;
-    for(p = HEAD; (p->next)->codProdus != codProdusPrimit; p = p->next)
-        indexVector++;
-
-    vectcodProd[indexVector + 1] = 0;
+    for(p = HEAD; (p->next)->codProdus != codProdusPrimit; p = p->next);
 
     p->next = (p->next)->next;                                        // Stergerea produsului in celelalte cazuri
     delete p_aux;                                                   // si refacearea legaturilor
-    for(int i = 0; i < 10; i++)
-        cout << vectcodProd[i] << " ";
 }
 
 void CumparareProdus(int codProdus)
