@@ -49,11 +49,15 @@ void AfisareDetaliiProdus(Produs *produsCautat)
 
     //Continutul liniei VV
     Table afisareElement;
-    char codProdus [3];
-    char numeProdus [30];
+    char codProdus[3];
+    char numeProdus[30];
     char cantitateProdus[6];
     char pretProdus[6];
-    afisareElement.add_row({to_string(produsCautat->codProdus), produsCautat->numeProdus, to_string(produsCautat->cantitateProdus), to_string(produsCautat->pretProdus)});
+    itoa(produsCautat->codProdus, codProdus, 10);
+    strcpy(numeProdus, produsCautat->numeProdus.c_str());
+    itoa(produsCautat->cantitateProdus, cantitateProdus, 10);
+    sprintf(pretProdus, "%.2f", produsCautat->pretProdus);
+    afisareElement.add_row({codProdus, numeProdus, cantitateProdus, pretProdus});
 
     afisareElement.format() //CULOOOOOOOOOOORI
             .corner_top_left("*")
@@ -75,7 +79,7 @@ void AfisareDetaliiProdus(Produs *produsCautat)
             .border_top_color(Color::cyan)
             .border_bottom_color(Color::cyan);
 
-    cout<< afisareElement << endl;
+    cout << afisareElement << endl;
 
 }
 
@@ -148,27 +152,30 @@ void CumparareProdus(int codProdus)
 void AdaugareProdus()
 {
     Produs *q = NULL;
-        int n;
-        cout<<"Cate Produse Doriti sa introduceti ? ";
-        cin>>n;
-        for (int i = 0; i < n; i++){
-            Produs *p = new Produs;
-            cout<<"Codul produsului este :";
-            cin>>p->codProdus;
-            cout<<"Numele prtodusului este :";
-            cin>>p->numeProdus;
-            cout<<"Cantitatea prdusului este :";
-            cin>>p->cantitateProdus;
-            cout<<"Pretul produsului este :";
-            cin>>p->pretProdus;
-            p->next = NULL;
-            if(HEAD == NULL){
-                HEAD = p;
-            }else{
-                q->next = p;
-            }
-            q=p;
+    int n;
+    cout << "Cate Produse Doriti sa introduceti ? " << endl;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        Produs *p = new Produs;
+        cout << "Codul produsului este :";
+        cin >> p->codProdus;
+        cout << "Numele prtodusului este :";
+        cin >> p->numeProdus;
+        cout << "Cantitatea prdusului este :";
+        cin >> p->cantitateProdus;
+        cout << "Pretul produsului este :";
+        cin >> p->pretProdus;
+        p->next = NULL;
+        if (HEAD == NULL)
+        {
+            HEAD = p;
+        } else
+        {
+            q->next = p;
         }
+        q = p;
+    }
 
 }
 
