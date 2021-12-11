@@ -81,53 +81,6 @@ void AdaugareProdus()
     return;
 }
 
-void AfisareProduse()
-{
-    //Parcurgem lista de produse.
-    //Afisam informatiile produselor intr-un tabel.
-
-    const char separator = ' ';
-    const int lungimeCategorie = 20; //Asta este numarul maxim de caractere care va fi afisat (include spatiile)
-    Produs *iter;
-    cout << "Lista de produse este: " << endl;
-    for (iter = HEAD; iter->next != NULL; iter = iter->next)
-    {
-
-        //Numele coloanelor VV
-        std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Cod Produs";
-        std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Nume Produs";
-        std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Cantitate Produs";
-        std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Pret Produs" << std::endl;
-
-        //Continutul liniei VV
-        std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << iter->codProdus;
-        std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << iter->numeProdus;
-        std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << iter->cantitateProdus;
-        std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << iter->pretProdus
-                  << std::endl;
-    }
-    //Numele coloanelor VV
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Cod Produs";
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Nume Produs";
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Cantitate Produs";
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << "Pret Produs" << std::endl;
-
-    //Continutul liniei VV
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << iter->codProdus;
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << iter->numeProdus;
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << iter->cantitateProdus;
-    std::cout << std::left << std::setw(lungimeCategorie) << std::setfill(separator) << iter->pretProdus << std::endl;
-    cout << "-> END. \n";
-    for (int i = 0; i <= 899; i++)
-    {
-        if (vectcodProd[i] != 0)
-        {
-            cout << i << " " << vectcodProd[i] << endl;
-        }
-
-    };
-}
-
 Produs *CautareProdus(int CodCautat)
 {
     Produs *cod = HEAD;
@@ -158,13 +111,14 @@ void AfisareDetaliiProdus(Produs *produsCautat)
     //Continutul liniei VV
     Table afisareElement;
     char codProdus[3];
-    char numeProdus[30];
-    char cantitateProdus[6];
-    char pretProdus[6];
+    char numeProdus[20];
+    char cantitateProdus[20];
+    char pretProdus[20];
     itoa(produsCautat->codProdus, codProdus, 10);
     strcpy(numeProdus, produsCautat->numeProdus.c_str());
     itoa(produsCautat->cantitateProdus, cantitateProdus, 10);
     sprintf(pretProdus, "%.2f", produsCautat->pretProdus);
+    afisareElement.add_row({"COD PRODUS", "DENUMIRE PRODUS", "CANTITATE", "PRET"});
     afisareElement.add_row({codProdus, numeProdus, cantitateProdus, pretProdus});
 
     afisareElement.format() //CULOOOOOOOOOOORI
@@ -257,6 +211,253 @@ void CumparareProdus(int codProdus)
         StergeProdus(codProdus);
 }
 
+void AfisareProduse()
+{
+    Table listaProduse;
+    listaProduse.add_row({"COD PRODUS", "DENUMIRE PRODUS", "CANTITATE", "PRET"});
+    listaProduse[0][0].format()
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .font_style({FontStyle::bold})
+            .font_color(Color::green)
+            .font_align(FontAlign::center)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_bottom_color(Color::cyan);
+            .border_top_color(Color::cyan)
+    listaProduse[0][1].format()
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .font_style({FontStyle::bold})
+            .font_color(Color::green)
+            .font_align(FontAlign::center)
+            .border_top("~")
+            .border_left("|")
+            .border_bottom("~")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+    listaProduse[0][2].format()
+            .border_bottom_color(Color::cyan);
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .font_style({FontStyle::bold})
+            .font_color(Color::green)
+            .font_align(FontAlign::center)
+            .border_left("|")
+            .border_top("~")
+            .border_bottom("~")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan);
+    listaProduse[0][3].format()
+            .corner_top_left("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right("*")
+            .font_style({FontStyle::bold})
+            .corner_top_right_color(Color::red)
+            .font_color(Color::green)
+            .font_align(FontAlign::center)
+            .border_bottom("~")
+            .border_top("~")
+            .border_left("|")
+            .border_left_color(Color::cyan)
+            .border_right("|")
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+    Produs *nodCrt = HEAD;
+            .border_bottom_color(Color::cyan);
+    int counter = 1;
+    {
+    while (nodCrt != NULL)
+        char codProdus[3];
+        char numeProdus[20];
+        char pretProdus[20];
+        char cantitateProdus[20];
+        strcpy(numeProdus, nodCrt->numeProdus.c_str());
+        itoa(nodCrt->codProdus, codProdus, 10);
+        itoa(nodCrt->cantitateProdus, cantitateProdus, 10);
+        sprintf(pretProdus, "%.2f", nodCrt->pretProdus);
+        if (nodCrt->cantitateProdus == 0){
+        listaProduse.add_row({codProdus, numeProdus, cantitateProdus, pretProdus});
+            listaProduse[counter][0].format()
+                    .font_style({FontStyle::crossed})
+                    .corner_top_left("*")
+                    .font_color(Color::red)
+                    .corner_top_right("*")
+                    .corner_bottom_right("*")
+                    .corner_bottom_left("*")
+                    .corner_top_left_color(Color::red)
+                    .corner_bottom_left_color(Color::red)
+                    .corner_top_right_color(Color::red)
+                    .corner_bottom_right_color(Color::red)
+                    .font_align(FontAlign::center)
+                    .border_top("~")
+                    .border_left("|")
+                    .border_bottom("~")
+                    .border_right("|")
+                    .border_left_color(Color::red)
+                    .border_right_color(Color::red)
+                    .border_top_color(Color::cyan)
+            listaProduse[counter][1].format()
+                    .border_bottom_color(Color::cyan);
+                    .font_style({FontStyle::crossed})
+                    .font_color(Color::red)
+                    .corner_top_left("*")
+                    .corner_top_right("*")
+                    .corner_bottom_left("*")
+                    .corner_bottom_right("*")
+                    .corner_top_left_color(Color::red)
+                    .corner_top_right_color(Color::red)
+                    .corner_bottom_right_color(Color::red)
+                    .font_align(FontAlign::center)
+                    .corner_bottom_left_color(Color::red)
+                    .border_top("~")
+                    .border_bottom("~")
+                    .border_left("|")
+                    .border_right_color(Color::red)
+                    .border_left_color(Color::red)
+                    .border_right("|")
+                    .border_top_color(Color::cyan)
+                    .border_bottom_color(Color::cyan);
+            listaProduse[counter][2].format()
+                    .font_style({FontStyle::crossed})
+                    .font_color(Color::red)
+                    .corner_top_left("*")
+                    .corner_top_right("*")
+                    .corner_bottom_left("*")
+                    .corner_bottom_right("*")
+                    .corner_top_left_color(Color::red)
+                    .corner_top_right_color(Color::red)
+                    .corner_bottom_right_color(Color::red)
+                    .corner_bottom_left_color(Color::red)
+                    .font_align(FontAlign::center)
+                    .border_bottom("~")
+                    .border_top("~")
+                    .border_left("|")
+                    .border_right("|")
+                    .border_left_color(Color::red)
+                    .border_top_color(Color::cyan)
+                    .border_right_color(Color::red)
+                    .border_bottom_color(Color::cyan);
+            listaProduse[counter][3].format()
+                    .font_color(Color::red)
+                    .corner_top_left("*")
+                    .font_style({FontStyle::crossed})
+                    .corner_top_right("*")
+                    .corner_bottom_right("*")
+                    .corner_bottom_left("*")
+                    .corner_top_right_color(Color::red)
+                    .corner_top_left_color(Color::red)
+                    .corner_bottom_right_color(Color::red)
+                    .corner_bottom_left_color(Color::red)
+                    .font_align(FontAlign::center)
+                    .border_top("~")
+                    .border_bottom("~")
+                    .border_left("|")
+                    .border_right("|")
+                    .border_left_color(Color::red)
+                    .border_right_color(Color::red)
+                    .border_top_color(Color::cyan)
+                    .border_bottom_color(Color::cyan);
+        } else {
+                    .font_color(Color::cyan)
+            listaProduse[counter][0].format()
+                    .corner_top_left("*")
+                    .corner_top_right("*")
+                    .corner_bottom_left("*")
+                    .corner_bottom_right("*")
+                    .corner_top_left_color(Color::red)
+                    .corner_top_right_color(Color::red)
+                    .corner_bottom_left_color(Color::red)
+                    .font_align(FontAlign::center)
+                    .corner_bottom_right_color(Color::red)
+                    .border_top("~")
+                    .border_bottom("~")
+                    .border_right("|")
+                    .border_left("|")
+                    .border_left_color(Color::cyan)
+                    .border_top_color(Color::cyan)
+                    .border_right_color(Color::cyan)
+                    .border_bottom_color(Color::cyan);
+            listaProduse[counter][1].format()
+                    .font_color(Color::cyan)
+                    .corner_top_right("*")
+                    .corner_top_left("*")
+                    .corner_bottom_left("*")
+                    .corner_bottom_right("*")
+                    .corner_top_right_color(Color::red)
+                    .corner_top_left_color(Color::red)
+                    .corner_bottom_left_color(Color::red)
+                    .corner_bottom_right_color(Color::red)
+                    .font_align(FontAlign::center)
+                    .border_top("~")
+                    .border_left("|")
+                    .border_bottom("~")
+                    .border_right("|")
+                    .border_left_color(Color::cyan)
+                    .border_right_color(Color::cyan)
+                    .border_bottom_color(Color::cyan);
+                    .border_top_color(Color::cyan)
+                    .font_color(Color::cyan)
+            listaProduse[counter][2].format()
+                    .corner_top_left("*")
+                    .corner_top_right("*")
+                    .corner_bottom_left("*")
+                    .corner_bottom_right("*")
+                    .corner_top_left_color(Color::red)
+                    .corner_top_right_color(Color::red)
+                    .corner_bottom_left_color(Color::red)
+                    .corner_bottom_right_color(Color::red)
+                    .font_align(FontAlign::center)
+                    .border_bottom("~")
+                    .border_top("~")
+                    .border_left("|")
+                    .border_left_color(Color::cyan)
+                    .border_right("|")
+                    .border_right_color(Color::cyan)
+                    .border_top_color(Color::cyan)
+                    .border_bottom_color(Color::cyan);
+            listaProduse[counter][3].format()
+                    .font_color(Color::cyan)
+                    .corner_top_left("*")
+                    .corner_top_right("*")
+                    .corner_bottom_left("*")
+                    .corner_bottom_right("*")
+                    .corner_top_right_color(Color::red)
+                    .corner_top_left_color(Color::red)
+                    .corner_bottom_left_color(Color::red)
+                    .corner_bottom_right_color(Color::red)
+                    .font_align(FontAlign::center)
+                    .border_bottom("~")
+                    .border_top("~")
+                    .border_left("|")
+                    .border_left_color(Color::cyan)
+                    .border_right("|")
+                    .border_top_color(Color::cyan)
+                    .border_right_color(Color::cyan)
+                    .border_bottom_color(Color::cyan);
+        nodCrt = nodCrt->next;
+        }
+        counter++;
+    }
+
+    cout << listaProduse << endl;
+
+}
 void OptiuneUtilizator(int userInput)
 {
     while (userInput)
@@ -294,6 +495,7 @@ void OptiuneUtilizator(int userInput)
             {
                 int codProdus;
                 cout << "Introduceti codul produsului pe care doriti sa il achizitionati:  " << endl;
+                cin >> codProdus;
                 CumparareProdus(codProdus);
                 cout << endl;
             }
