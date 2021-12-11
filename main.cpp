@@ -152,15 +152,22 @@ bool ValidareStoc(int cantitateCumparata, Produs *produsCurent)
     return true; // Am pus asta temporar - pentru a nu mai vedea warningul
 }
 
-void StergeProdus(int codProdus)
+void StergeProdus(int codProdusPrimit)
 {
-    Produs *p = CautareProdus(codProdus);
+    Produs *p = CautareProdus(codProdusPrimit);
 
     if (p == nullptr)
     {                                              //  Cand nu s-a gasit produsul, functia se opreste
         cout << "Produsul nu s-a gasit";
         return;
     }
+
+    cout << "### test produs gasit ###\n";
+    cout << p->codProdus << " : " << p->numeProdus;
+    cout << "### test HEAD ###\n";
+    cout << HEAD->codProdus << " : " << HEAD->numeProdus;
+
+
 
     Produs *p_aux = p;
 
@@ -169,16 +176,23 @@ void StergeProdus(int codProdus)
         p = p->next;
         HEAD = p;
         delete p_aux;
+        vectcodProd[0] = 0;
+        cout << "###Se sterge primul element###\n";    //Codul Produsului care va fi sters va fi marcat cu 0;
+        for(int i = 0; i < 10; i++)
+            cout << vectcodProd[i] << " ";
         return;
     }
 
-    int codProdusAnterior = codProdus - 1;
-    while ((p = CautareProdus(codProdusAnterior)) ==
-           nullptr)       // Gasirea produsului anterior care are cod valid in caz
-        codProdusAnterior--;                                       // ca au mai fost facute stergeri
+    int indexVector = 0;
+    for(p = HEAD; (p->next)->codProdus != codProdusPrimit; p = p->next)
+        indexVector++;
 
-    p->next = (p->next)->next;                                     // Stergerea produsului in celelalte cazuri
-    delete p_aux;                                                  // si refacearea legaturilor
+    vectcodProd[indexVector + 1] = 0;
+
+    p->next = (p->next)->next;                                        // Stergerea produsului in celelalte cazuri
+    delete p_aux;                                                   // si refacearea legaturilor
+    for(int i = 0; i < 10; i++)
+        cout << vectcodProd[i] << " ";
 }
 
 void CumparareProdus(int codProdus)
