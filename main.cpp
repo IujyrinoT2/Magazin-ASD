@@ -4,6 +4,8 @@
 #include <iomanip> //Folosit pentru afisare sub forma de tabel
 #include "single_include/tabulate/tabulate.hpp"
 
+//Hey asta va fi main
+
 using namespace std;
 using namespace tabulate;
 
