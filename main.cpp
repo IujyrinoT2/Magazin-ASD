@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <new>
 #include <iomanip> //Folosit pentru afisare sub forma de tabel
 #include "single_include/tabulate/tabulate.hpp"
 
@@ -10,7 +11,7 @@ struct Produs
 {
     string numeProdus;
     int codProdus;
-    double pretProdus;
+    float pretProdus;//Era float dar arata urat la afisare
     int cantitateProdus;
     Produs *next;
 };
@@ -41,24 +42,41 @@ Produs *CautareProdus(int CodCautat)
 
 void AfisareDetaliiProdus(Produs *produsCautat)
 {
-
     if (produsCautat == nullptr)
     {
         return; //Testeaza daca produsul dat ca argument nu este null
     }
-    const char separator = ' ';
-    const int lungimeCategorie = 20; //Asta este numarul maxim de caractere care va fi afisat (include spatiile)
-    //Numele coloanelor VV
-    cout << left << std::setw(lungimeCategorie) << setfill(separator) << "Cod Produs";
-    cout << left << std::setw(lungimeCategorie) << setfill(separator) << "Nume Produs";
-    cout << left << std::setw(lungimeCategorie) << setfill(separator) << "Cantitate Produs";
-    cout << left << std::setw(lungimeCategorie) << setfill(separator) << "Pret Produs" << endl;
 
     //Continutul liniei VV
-    cout << left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->codProdus;
-    cout << left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->numeProdus;
-    cout << left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->cantitateProdus;
-    cout << left << std::setw(lungimeCategorie) << std::setfill(separator) << produsCautat->pretProdus << endl;
+    Table afisareElement;
+    char codProdus [3];
+    char numeProdus [30];
+    char cantitateProdus[6];
+    char pretProdus[6];
+    afisareElement.add_row({to_string(produsCautat->codProdus), produsCautat->numeProdus, to_string(produsCautat->cantitateProdus), to_string(produsCautat->pretProdus)});
+
+    afisareElement.format() //CULOOOOOOOOOOORI
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_bottom_left("*")
+            .corner_bottom_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .corner_bottom_left_color(Color::red)
+            .corner_bottom_right_color(Color::red)
+            .font_align(FontAlign::center)
+            .font_color(Color::cyan)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan);
+
+    cout<< afisareElement << endl;
+
 }
 
 bool ValidareStoc(int cantitateCumparata, Produs *produsCurent)
@@ -129,10 +147,29 @@ void CumparareProdus(int codProdus)
 
 void AdaugareProdus()
 {
-    //Citim numeProdus, pretProdus, cantitateProdus
-    //Verificam daca exista produsul. Daca exista, doar vom creste cantitatea.
-    //codProdus va lua valoarea lui codProdusCounter.
-    //Incrementam codProdusCounter.
+    Produs *q = NULL;
+        int n;
+        cout<<"Cate Produse Doriti sa introduceti ? ";
+        cin>>n;
+        for (int i = 0; i < n; i++){
+            Produs *p = new Produs;
+            cout<<"Codul produsului este :";
+            cin>>p->codProdus;
+            cout<<"Numele prtodusului este :";
+            cin>>p->numeProdus;
+            cout<<"Cantitatea prdusului este :";
+            cin>>p->cantitateProdus;
+            cout<<"Pretul produsului este :";
+            cin>>p->pretProdus;
+            p->next = NULL;
+            if(HEAD == NULL){
+                HEAD = p;
+            }else{
+                q->next = p;
+            }
+            q=p;
+        }
+
 }
 
 void AfisareProduse()
@@ -212,7 +249,7 @@ void AfisareMeniu()
     Table tabelMeniu;
     tabelMeniu.add_row({"ID", "OPTIUNE", "DESCRIERE OPTIUNE"});
     tabelMeniu.add_row({"1", "Adaugare un produs", "Vom adauga un produs. Codul produsul este generat automat."});
-    tabelMeniu.add_row({"2", "Sergere un produs", "Se introduce codul produsului pe care doriti sa il stergeti."});
+    tabelMeniu.add_row({"2", "Stergere un produs", "Se introduce codul produsului pe care doriti sa il stergeti."});
     tabelMeniu.add_row({"3", "Afisare detalii pentru un produs",
                         "Se introduce codul produsului al carui detalii va intereseaza."});
     tabelMeniu.add_row(
