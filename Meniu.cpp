@@ -145,6 +145,10 @@ void Meniu::AfisareMeniu()
                 this->_stocProduse->CautaProdus(codProdus)->SetPretProdus(pretProdus);
                 cout << endl;
             }
+            case 6969: //Modificare denumire pret
+            {
+                this->_stocProduse->ExportStoc();
+            }
                 break;
             case 0: //Iesire din program
             {
@@ -157,4 +161,9 @@ void Meniu::AfisareMeniu()
             }
         }
     }
+}
+
+Lista *Meniu::GetStocProduse()
+{
+    return this->_stocProduse;
 }

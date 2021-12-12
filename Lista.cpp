@@ -6,16 +6,6 @@ Lista::Lista()
     this->_coduriProdus = vector(899, 0);
 }
 
-Produs *Lista::GetHead()
-{
-    return this->_HEAD;
-}
-
-void Lista::SetHead(Produs *noulHead)
-{
-    this->_HEAD = noulHead;
-}
-
 void Lista::AdaugaProdus()
 {
     Produs *produsNou = new Produs;
@@ -225,7 +215,8 @@ void Lista::CumparaProdus(int codProdus)
 
     p->SetCantitateProdus(p->GetCantitateProdus() - cantitateCumparata);
 
-    if (!p->GetCantitateProdus()){
+    if (!p->GetCantitateProdus())
+    {
         cout << "Cantitatea acestui produs a ajuns la 0." << endl;
         StergeProdus(codProdus);
     }
@@ -514,4 +505,50 @@ int Lista::GenereazaCodProdus()
             return _coduriProdus[i];
         }
     }
+}
+
+void Lista::InitializareLista()
+{
+    string numeProdus;
+    float pretProdus;
+    int cantitateProdus;
+    string trashCan;
+
+    ifstream fin("Stoc.csv");
+    fin >> trashCan >> trashCan >> trashCan;
+
+    while (fin >> numeProdus >> cantitateProdus >> pretProdus)
+    {
+        Produs *produsNou = new Produs;
+        produsNou->SetCodProdus(GenereazaCodProdus());
+        produsNou->SetNumeProdus(numeProdus);
+        produsNou->SetPretProdus(pretProdus);
+        produsNou->SetCantitateProdus(cantitateProdus);
+        produsNou->SetNext(NULL);
+        if (this->_HEAD != NULL)
+        {
+            Produs *produsCurent = this->_HEAD;
+            while (produsCurent->GetNext() != NULL)
+            {
+                produsCurent = produsCurent->GetNext();
+            }
+            produsCurent->SetNext(produsNou);
+        } else
+        {
+            this->_HEAD = produsNou;
+        }
+    }
+    fin.close();
+}
+
+void Lista::ExportStoc()
+{
+    ofstream fout("Stoc.csv");
+    fout << "Cod produs" << "," << "Denumire produs" << "," << "Cantitate produs" << "," << "Pret produs";
+    Produs* p = this->_HEAD->GetNext();
+    while (p->GetNext()!=NULL){
+        fout << p->GetCodProdus() << "," << p->GetNumeProdus() << "," << p->GetCantitateProdus() << "," << p->GetPretProdus();
+        p = p->GetNext();
+    }
+    fout.close();
 }

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 #include "single_include/tabulate/tabulate.hpp"
 
 using namespace std;

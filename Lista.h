@@ -10,8 +10,6 @@ private:
     vector<int> _coduriProdus;
 public:
     Lista();
-    Produs* GetHead();
-    void SetHead(Produs* noulHead);
     void AdaugaProdus();
     void StergeProdus(int codProdus);
     void AfiseazaProdus(Produs *produsCautat);
@@ -20,6 +18,8 @@ public:
     bool ValideazaStoc(int cantitateCumparata, Produs *produsCurent);
     void AfiseazaLista();
     int GenereazaCodProdus();
+    void InitializareLista();
+    void ExportStoc();
 };
 
 

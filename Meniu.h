@@ -10,6 +10,7 @@ private:
 public:
     Meniu();
     void AfisareMeniu();
+    Lista* GetStocProduse();
 };
 
 
