@@ -20,6 +20,7 @@ void Meniu::AfisareMeniu()
     tabelMeniu.add_row({"103", "Modificare pret produs"});
     tabelMeniu.add_row({"800", "Importa produse (Stoc.in)"});
     tabelMeniu.add_row({"900", "Exporta stoc (Stoc.csv)"});
+    tabelMeniu.add_row({"1001", "Afiseaza optiuni"});
     tabelMeniu.add_row({"0", "Iesire din program"});
     tabelMeniu[0].format()
             .font_color(Color::green)
@@ -147,14 +148,19 @@ void Meniu::AfisareMeniu()
                 this->_stocProduse->CautaProdus(codProdus)->SetPretProdus(pretProdus);
                 cout << endl;
             }
-            case 800: //Modificare denumire pret
+            case 800: //Importa stoc
             {
                 this->_stocProduse->ImportStoc();
             }
                 break;
-            case 900: //Modificare denumire pret
+            case 900: //Exporta stoc
             {
                 this->_stocProduse->ExportStoc();
+            }
+                break;
+            case 1001: //Afiseaza optiuni
+            {
+                this->AfiseazaOptiuni();
             }
                 break;
             case 0: //Iesire din program
@@ -170,7 +176,64 @@ void Meniu::AfisareMeniu()
     }
 }
 
+void Meniu::AfiseazaOptiuni()
+{
+    Table tabelMeniu;
+    tabelMeniu.add_row({"ID", "OPTIUNE"});
+    tabelMeniu.add_row({"1", "Adaugare un produs"});
+    tabelMeniu.add_row({"2", "Stergere un produs"});
+    tabelMeniu.add_row({"3", "Afisare detalii pentru un produs"});
+    tabelMeniu.add_row({"4", "Cumparare un produs"});
+    tabelMeniu.add_row({"5", "Afisare lista produse"});
+    tabelMeniu.add_row({"101", "Modificare denumire produs"});
+    tabelMeniu.add_row({"102", "Modificare cantitate produs"});
+    tabelMeniu.add_row({"103", "Modificare pret produs"});
+    tabelMeniu.add_row({"800", "Importa produse (Stoc.in)"});
+    tabelMeniu.add_row({"900", "Exporta stoc (Stoc.csv)"});
+    tabelMeniu.add_row({"1001", "Afiseaza optiuni"});
+    tabelMeniu.add_row({"0", "Iesire din program"});
+    tabelMeniu[0].format()
+            .font_color(Color::green)
+            .font_align(FontAlign::center)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan)
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_bottom_left("*")
+            .corner_bottom_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .corner_bottom_left_color(Color::red)
+            .corner_bottom_right_color(Color::red);
+    tabelMeniu.format()
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_bottom_left("*")
+            .corner_bottom_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .corner_bottom_left_color(Color::red)
+            .corner_bottom_right_color(Color::red)
+            .font_align(FontAlign::center)
+            .font_color(Color::cyan)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan);
+    cout << tabelMeniu << endl;
+}
+
 Meniu::~Meniu()
 {
-  delete this->_stocProduse;
+    delete this->_stocProduse;
 }
