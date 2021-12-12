@@ -30,7 +30,6 @@ public:
     float GetPretProdus();
     int GetCantitateProdus();
     Produs* GetNext();
-    ~Produs();
 };
 
 

@@ -444,9 +444,3 @@ void Lista::AfiseazaLista()
     }
     cout << listaProduse << endl;
 }
-
-
-
-
-
-

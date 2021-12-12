@@ -54,17 +54,7 @@ int Produs::GetCantitateProdus()
     return this->_cantitateProdus;
 }
 
-Produs *Produs::GetUrmatorulProdus()
+Produs *Produs::GetNext()
 {
     return this->_next;
 }
-
-Produs::~Produs()
-{
-    cout << "Destructor: Produsul a fost sters cu succes." << endl;
-}
-
-
-
-
-
