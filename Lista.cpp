@@ -250,10 +250,8 @@ bool Lista::ValideazaStoc(int cantitateCumparata, Produs *produsCurent)
 void Lista::AfiseazaLista()
 {
     Table listaProduse;
-    Table coloanaUnu;
-    Table coloanaDoi;
     listaProduse.add_row(
-            {"COD PRODUS", "DENUMIRE PRODUS", "CANTITATE", "PRET", coloanaUnu, coloanaDoi});
+            {"COD PRODUS", "DENUMIRE PRODUS", "CANTITATE", "PRET"});
     listaProduse[0][0].format()
             .font_style({FontStyle::bold})
             .font_align(FontAlign::center);
