@@ -14,11 +14,12 @@ public:
     Produs* GetHead();
     void SetHead(Produs* noulHead);
     void AdaugaProdus();
-    void StergeProdus();
-    void AfiseazaProdus();
-    void CumparaProdus();
-    Produs* CautaProdus();
-    void ValideazaStoc();
+    void StergeProdus(int codProdus);
+    void AfiseazaProdus(Produs *produsCautat);
+    void CumparaProdus(int codProdus);
+    Produs* CautaProdus(int codProdus);
+    bool ValideazaStoc(int cantitateCumparata, Produs *produsCurent);
+    void AfiseazaLista();
 };
 
 

@@ -29,7 +29,7 @@ public:
     int GetCodProdus();
     float GetPretProdus();
     int GetCantitateProdus();
-    Produs* GetUrmatorulProdus();
+    Produs* GetNext();
     ~Produs();
 };
 

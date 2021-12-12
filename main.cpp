@@ -439,7 +439,6 @@ void AfisareProduse()
         nodCrt = nodCrt->next;
         counter++;
     }
-
     cout << listaProduse << endl;
 }
 
