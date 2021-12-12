@@ -507,7 +507,7 @@ int Lista::GenereazaCodProdus()
     }
 }
 
-void Lista::InitializareLista()
+void Lista::ImportStoc()
 {
     string numeProdus;
     float pretProdus;

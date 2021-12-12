@@ -18,7 +18,7 @@ public:
     bool ValideazaStoc(int cantitateCumparata, Produs *produsCurent);
     void AfiseazaLista();
     int GenereazaCodProdus();
-    void InitializareLista();
+    void ImportStoc();
     void ExportStoc();
 };
 

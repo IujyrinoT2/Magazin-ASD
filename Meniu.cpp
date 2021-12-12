@@ -2,12 +2,12 @@
 
 Meniu::Meniu()
 {
-  this->_stocProduse = new Lista;
+    this->_stocProduse = new Lista;
 }
 
 void Meniu::AfisareMeniu()
 {
-    int userInput=5000;
+    int userInput = 5000;
     Table tabelMeniu;
     tabelMeniu.add_row({"ID", "OPTIUNE"});
     tabelMeniu.add_row({"1", "Adaugare un produs"});
@@ -18,7 +18,8 @@ void Meniu::AfisareMeniu()
     tabelMeniu.add_row({"101", "Modificare denumire produs"});
     tabelMeniu.add_row({"102", "Modificare cantitate produs"});
     tabelMeniu.add_row({"103", "Modificare pret produs"});
-    tabelMeniu.add_row({"900", "Exporta stoc (fisier.csv)"});
+    tabelMeniu.add_row({"800", "Importa produse (Stoc.in)"});
+    tabelMeniu.add_row({"900", "Exporta stoc (Stoc.csv)"});
     tabelMeniu.add_row({"0", "Iesire din program"});
     tabelMeniu[0].format()
             .font_color(Color::green)
@@ -109,10 +110,10 @@ void Meniu::AfisareMeniu()
             { ;
                 int codProdus;
                 string denumireProdus;
-                cout <<"Introduceti codul produsului pe care vreti sa il modificati: ";
+                cout << "Introduceti codul produsului pe care vreti sa il modificati: ";
                 cin >> codProdus;
                 cout << endl;
-                cout <<"Introduceti noul nume al produsului: ";
+                cout << "Introduceti noul nume al produsului: ";
                 cin >> denumireProdus;
                 cout << endl;
                 this->_stocProduse->CautaProdus(codProdus)->SetNumeProdus(denumireProdus);
@@ -123,10 +124,10 @@ void Meniu::AfisareMeniu()
             { ;
                 int codProdus;
                 int cantitateProdus;
-                cout <<"Introduceti codul produsului pe care vreti sa il modificati: ";
+                cout << "Introduceti codul produsului pe care vreti sa il modificati: ";
                 cin >> codProdus;
                 cout << endl;
-                cout <<"Introduceti noua cantitate a produsului: ";
+                cout << "Introduceti noua cantitate a produsului: ";
                 cin >> cantitateProdus;
                 cout << endl;
                 this->_stocProduse->CautaProdus(codProdus)->SetCantitateProdus(cantitateProdus);
@@ -137,15 +138,20 @@ void Meniu::AfisareMeniu()
             { ;
                 int codProdus;
                 float pretProdus;
-                cout <<"Introduceti codul produsului pe care vreti sa il modificati: ";
+                cout << "Introduceti codul produsului pe care vreti sa il modificati: ";
                 cin >> codProdus;
-                cout <<endl;
-                cout <<"Introduceti noul pret al produsului: ";
-                cin >>pretProdus;
-                cout <<endl;
+                cout << endl;
+                cout << "Introduceti noul pret al produsului: ";
+                cin >> pretProdus;
+                cout << endl;
                 this->_stocProduse->CautaProdus(codProdus)->SetPretProdus(pretProdus);
                 cout << endl;
             }
+            case 800: //Modificare denumire pret
+            {
+                this->_stocProduse->ImportStoc();
+            }
+                break;
             case 900: //Modificare denumire pret
             {
                 this->_stocProduse->ExportStoc();
