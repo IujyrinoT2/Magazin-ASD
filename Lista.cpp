@@ -3,6 +3,7 @@
 Lista::Lista()
 {
     this->_HEAD = new Produs;
+    this->_coduriProdus = vector(899, 0);
 }
 
 Produs *Lista::GetHead()
@@ -39,7 +40,7 @@ void Lista::AdaugaProdus()
     produsNou->SetCantitateProdus(cantitateProdusNou);
     produsNou->SetNext(NULL);
 
-    if (this->_HEAD!= NULL)
+    if (this->_HEAD != NULL)
     {
         Produs *produsCurent = this->_HEAD;
         while (produsCurent->GetNext() != NULL)
@@ -56,15 +57,30 @@ void Lista::AdaugaProdus()
 void Lista::StergeProdus(int codProdus)
 {
     Produs *p = CautaProdus(codProdus);
-    if(p == NULL){
+    if (p == NULL)
+    {
         cout << "Produsul nu a fost gasit";
-    } else {
-        Produs *p_aux = this->_HEAD->GetNext();
-        while(p_aux->GetNext() != p){
+        return;
+    }
+    for (int i = 0; i < 899; i++)
+    {
+        if (_coduriProdus[i] == codProdus)
+        {
+            _coduriProdus[i] = 0;
+        }
+    }
+    if (this->_HEAD->GetNext() == p)
+    {
+        this->_HEAD->SetNext(p->GetNext());
+        delete p;
+    } else
+    {
+        Produs *p_aux = this->_HEAD;
+        while (p_aux->GetNext() != p)
+        {
             p_aux = p_aux->GetNext();
         }
         p_aux->SetNext(p->GetNext());
-        this->_coduriLibere.push_back(p->GetCodProdus());
         delete p;
     }
 }
@@ -75,7 +91,7 @@ void Lista::AfiseazaProdus(Produs *produsCautat)
     {
         return;
     }
-    //Continutul liniei VV
+
     Table afisareElement;
     char pretProdus[20];
     sprintf(pretProdus, "%.2f", produsCautat->GetPretProdus());
@@ -189,26 +205,30 @@ void Lista::CumparaProdus(int codProdus)
         cout << "Nu s-a gasit produsul" << endl;
         return;
     }
-    // Vom cere cantitate cumparata (citita la tastatura) - tip int
     int cantitateCumparata;
-    do
+    cout << "Introduceti cantitatea cumparata: ";
+    cin >> cantitateCumparata;
+    cout << endl;
+
+    while (cantitateCumparata < 0)
     {
-        cout << "Ce cantitate doriti sa cumparati? ";
+        cout << "Introduceti o cantitate cumparata valida: ";
         cin >> cantitateCumparata;
-        if (cantitateCumparata <= 0)
-            cout << "Introduceti o cantitate valida" << endl;
-    } while (cantitateCumparata <= 0);
-    // Chemam validareStoc(int cantitateCumparata, CautareProdus(int codProdus))
+        cout << endl;
+    }
+
     if (!ValideazaStoc(cantitateCumparata, CautaProdus(codProdus)))
     {
         cout << "Stoc insuficient" << endl;
         return;
     }
-    // Vom scadea cantitatea produsului cu cantitatea cumparata
+
     p->SetCantitateProdus(p->GetCantitateProdus() - cantitateCumparata);
-    // Verificam daca stocul ajunge la 0, daca da, chemam StergeProdus(int codProdus)
-    if (!p->GetCantitateProdus())
+
+    if (!p->GetCantitateProdus()){
+        cout << "Cantitatea acestui produs a ajuns la 0." << endl;
         StergeProdus(codProdus);
+    }
 }
 
 Produs *Lista::CautaProdus(int codCautat)
@@ -233,7 +253,7 @@ Produs *Lista::CautaProdus(int codCautat)
 
 bool Lista::ValideazaStoc(int cantitateCumparata, Produs *produsCurent)
 {
-    return true;
+    return 0 <= produsCurent->GetCantitateProdus() - cantitateCumparata;
 }
 
 void Lista::AfiseazaLista()
@@ -486,19 +506,12 @@ void Lista::AfiseazaLista()
 
 int Lista::GenereazaCodProdus()
 {
-    if (this->_HEAD->GetNext()==NULL){
-        return 100;
-    }
-    if (this->_coduriLibere.size()){
-        int codProdusGenerat;
-        codProdusGenerat = this->_coduriLibere[this->_coduriLibere.size()-1];
-        this->_coduriLibere.pop_back();
-        return codProdusGenerat;
-    } else {
-        Produs *p_aux = this->_HEAD->GetNext();
-        while(p_aux->GetNext() != NULL){
-            p_aux = p_aux->GetNext();
+    for (int i = 0; i < 899; i++)
+    {
+        if (_coduriProdus[i] == 0)
+        {
+            _coduriProdus[i] = i + 100;
+            return _coduriProdus[i];
         }
-        return p_aux->GetCodProdus()+1;
     }
 }

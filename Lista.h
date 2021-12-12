@@ -7,7 +7,7 @@ class Lista
 {
 private:
     Produs* _HEAD;
-    vector<int> _coduriLibere;
+    vector<int> _coduriProdus;
 public:
     Lista();
     Produs* GetHead();
