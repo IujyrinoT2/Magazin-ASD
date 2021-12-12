@@ -513,8 +513,9 @@ void Lista::InitializareLista()
     float pretProdus;
     int cantitateProdus;
     string trashCan;
+    char smallTrashcan;
 
-    ifstream fin("Stoc.csv");
+    ifstream fin("Stoc.in");
     fin >> trashCan >> trashCan >> trashCan;
 
     while (fin >> numeProdus >> cantitateProdus >> pretProdus)
@@ -544,10 +545,12 @@ void Lista::InitializareLista()
 void Lista::ExportStoc()
 {
     ofstream fout("Stoc.csv");
-    fout << "Cod produs" << "," << "Denumire produs" << "," << "Cantitate produs" << "," << "Pret produs";
-    Produs* p = this->_HEAD->GetNext();
-    while (p->GetNext()!=NULL){
-        fout << p->GetCodProdus() << "," << p->GetNumeProdus() << "," << p->GetCantitateProdus() << "," << p->GetPretProdus();
+    fout << "Cod produs" << "," << "Denumire produs" << "," << "Cantitate produs" << "," << "Pret produs" << endl;
+    Produs *p = this->_HEAD->GetNext();
+    while (p != NULL)
+    {
+        fout << p->GetCodProdus() << "," << p->GetNumeProdus() << "," << p->GetCantitateProdus() << ","
+             << p->GetPretProdus() << endl;
         p = p->GetNext();
     }
     fout.close();

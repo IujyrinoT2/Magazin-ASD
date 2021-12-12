@@ -18,6 +18,7 @@ void Meniu::AfisareMeniu()
     tabelMeniu.add_row({"101", "Modificare denumire produs"});
     tabelMeniu.add_row({"102", "Modificare cantitate produs"});
     tabelMeniu.add_row({"103", "Modificare pret produs"});
+    tabelMeniu.add_row({"900", "Exporta stoc (fisier.csv)"});
     tabelMeniu.add_row({"0", "Iesire din program"});
     tabelMeniu[0].format()
             .font_color(Color::green)
@@ -145,7 +146,7 @@ void Meniu::AfisareMeniu()
                 this->_stocProduse->CautaProdus(codProdus)->SetPretProdus(pretProdus);
                 cout << endl;
             }
-            case 6969: //Modificare denumire pret
+            case 900: //Modificare denumire pret
             {
                 this->_stocProduse->ExportStoc();
             }
