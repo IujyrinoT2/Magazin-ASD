@@ -7,8 +7,7 @@ class Lista
 {
 private:
     Produs* _HEAD;
-    vector<int> _vectcodProd;
-
+    vector<int> _coduriLibere;
 public:
     Lista();
     Produs* GetHead();
@@ -20,6 +19,7 @@ public:
     Produs* CautaProdus(int codProdus);
     bool ValideazaStoc(int cantitateCumparata, Produs *produsCurent);
     void AfiseazaLista();
+    int GenereazaCodProdus();
 };
 
 
