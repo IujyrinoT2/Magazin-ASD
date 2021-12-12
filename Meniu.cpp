@@ -15,6 +15,9 @@ void Meniu::AfisareMeniu()
     tabelMeniu.add_row({"3", "Afisare detalii pentru un produs"});
     tabelMeniu.add_row({"4", "Cumparare un produs"});
     tabelMeniu.add_row({"5", "Afisare lista produse"});
+    tabelMeniu.add_row({"101", "Modificare denumire produs"});
+    tabelMeniu.add_row({"102", "Modificare cantitate produs"});
+    tabelMeniu.add_row({"103", "Modificare pret produs"});
     tabelMeniu.add_row({"0", "Iesire din program"});
     tabelMeniu[0].format()
             .font_color(Color::green)
@@ -98,6 +101,48 @@ void Meniu::AfisareMeniu()
             case 5: //Afisare produse
             { ;
                 this->_stocProduse->AfiseazaLista();
+                cout << endl;
+            }
+                break;
+            case 101: //Modificare denumire
+            { ;
+                int codProdus;
+                string denumireProdus;
+                cout <<"Introduceti codul produsului pe care vreti sa il modificati: ";
+                cin >> codProdus;
+                cout << endl;
+                cout <<"Introduceti noul nume al produsului: ";
+                cin >> denumireProdus;
+                cout << endl;
+                this->_stocProduse->CautaProdus(codProdus)->SetNumeProdus(denumireProdus);
+                cout << endl;
+            }
+                break;
+            case 102: //Modificare cantitate
+            { ;
+                int codProdus;
+                int cantitateProdus;
+                cout <<"Introduceti codul produsului pe care vreti sa il modificati: ";
+                cin >> codProdus;
+                cout << endl;
+                cout <<"Introduceti noua cantitate a produsului: ";
+                cin >> cantitateProdus;
+                cout << endl;
+                this->_stocProduse->CautaProdus(codProdus)->SetCantitateProdus(cantitateProdus);
+                cout << endl;
+            }
+                break;
+            case 103: //Modificare denumire pret
+            { ;
+                int codProdus;
+                float pretProdus;
+                cout <<"Introduceti codul produsului pe care vreti sa il modificati: ";
+                cin >> codProdus;
+                cout <<endl;
+                cout <<"Introduceti noul pret al produsului: ";
+                cin >>pretProdus;
+                cout <<endl;
+                this->_stocProduse->CautaProdus(codProdus)->SetPretProdus(pretProdus);
                 cout << endl;
             }
                 break;
