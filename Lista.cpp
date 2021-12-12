@@ -555,3 +555,16 @@ void Lista::ExportStoc()
     }
     fout.close();
 }
+
+Lista::~Lista()
+{
+    Produs *n = NULL;
+    Produs *c = this->_HEAD;
+    while (c != NULL)
+    {
+        n = c->GetNext();
+        delete c;
+        c = n;
+    }
+    _coduriProdus.clear();
+}

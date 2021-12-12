@@ -170,7 +170,7 @@ void Meniu::AfisareMeniu()
     }
 }
 
-Lista *Meniu::GetStocProduse()
+Meniu::~Meniu()
 {
-    return this->_stocProduse;
+  delete this->_stocProduse;
 }

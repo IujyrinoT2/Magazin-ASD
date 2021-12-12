@@ -20,6 +20,7 @@ public:
     int GenereazaCodProdus();
     void ImportStoc();
     void ExportStoc();
+    ~Lista();
 };
 
 
