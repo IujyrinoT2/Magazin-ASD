@@ -338,6 +338,10 @@ void Lista::ImportStoc()
     char smallTrashcan;
 
     ifstream fin("Stoc.in");
+
+    if(!fin)
+        cout << "Eroare la deschiderea fisierului Stoc.csv\n Asigurati-va ca fiserul este inchis!\n";
+
     fin >> trashCan >> trashCan >> trashCan;
 
     while (fin >> numeProdus >> cantitateProdus >> pretProdus)
@@ -367,6 +371,9 @@ void Lista::ImportStoc()
 void Lista::ExportStoc()
 {
     ofstream fout("Stoc.csv");
+    if(!fout)
+        cout << "Eroare la deschiderea fisierului Stoc.csv\n Asigurati-va ca fiserul este inchis!\n";
+
     fout << "Cod produs" << "," << "Denumire produs" << "," << "Cantitate produs" << "," << "Pret produs" << endl;
     Produs *p = this->_HEAD->GetNext();
     while (p != NULL)
