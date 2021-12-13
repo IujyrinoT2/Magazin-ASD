@@ -3,7 +3,7 @@
 Lista::Lista()
 {
     this->_HEAD = new Produs;
-    this->_coduriProdus = vector(899, 0);
+    this->_coduriProdus = vector<int>(899, 0);
 }
 
 void Lista::AdaugaProdus()
@@ -252,71 +252,20 @@ bool Lista::ValideazaStoc(int cantitateCumparata, Produs *produsCurent)
 void Lista::AfiseazaLista()
 {
     Table listaProduse;
-    listaProduse.add_row({"COD PRODUS", "DENUMIRE PRODUS", "CANTITATE", "PRET"});
+    listaProduse.add_row(
+            {"COD PRODUS", "DENUMIRE PRODUS", "CANTITATE", "PRET"});
     listaProduse[0][0].format()
-            .corner_top_left("*")
-            .corner_top_right("*")
-            .corner_top_left_color(Color::red)
-            .corner_top_right_color(Color::red)
             .font_style({FontStyle::bold})
-            .font_color(Color::green)
-            .font_align(FontAlign::center)
-            .border_top("~")
-            .border_bottom("~")
-            .border_left("|")
-            .border_right("|")
-            .border_left_color(Color::cyan)
-            .border_right_color(Color::cyan)
-            .border_top_color(Color::cyan)
-            .border_bottom_color(Color::cyan);
+            .font_align(FontAlign::center);
     listaProduse[0][1].format()
-            .corner_top_left("*")
-            .corner_top_right("*")
-            .corner_top_left_color(Color::red)
-            .corner_top_right_color(Color::red)
             .font_style({FontStyle::bold})
-            .font_color(Color::green)
-            .font_align(FontAlign::center)
-            .border_top("~")
-            .border_bottom("~")
-            .border_left("|")
-            .border_right("|")
-            .border_left_color(Color::cyan)
-            .border_right_color(Color::cyan)
-            .border_top_color(Color::cyan)
-            .border_bottom_color(Color::cyan);
+            .font_align(FontAlign::center);
     listaProduse[0][2].format()
-            .corner_top_left("*")
-            .corner_top_right("*")
-            .corner_top_left_color(Color::red)
-            .corner_top_right_color(Color::red)
             .font_style({FontStyle::bold})
-            .font_color(Color::green)
-            .font_align(FontAlign::center)
-            .border_top("~")
-            .border_bottom("~")
-            .border_left("|")
-            .border_right("|")
-            .border_left_color(Color::cyan)
-            .border_right_color(Color::cyan)
-            .border_top_color(Color::cyan)
-            .border_bottom_color(Color::cyan);
+            .font_align(FontAlign::center);
     listaProduse[0][3].format()
-            .corner_top_left("*")
-            .corner_top_right("*")
-            .corner_top_left_color(Color::red)
-            .corner_top_right_color(Color::red)
             .font_style({FontStyle::bold})
-            .font_color(Color::green)
-            .font_align(FontAlign::center)
-            .border_top("~")
-            .border_bottom("~")
-            .border_left("|")
-            .border_right("|")
-            .border_left_color(Color::cyan)
-            .border_right_color(Color::cyan)
-            .border_top_color(Color::cyan)
-            .border_bottom_color(Color::cyan);
+            .font_align(FontAlign::center);
     Produs *nodCrt = this->_HEAD->GetNext();
     int counter = 1;
     while (nodCrt != NULL)
@@ -325,171 +274,41 @@ void Lista::AfiseazaLista()
         char numeProdus[20];
         char cantitateProdus[20];
         char pretProdus[20];
-        itoa(nodCrt->GetCodProdus(), codProdus, 10);
+        sprintf(codProdus, "%d", nodCrt->GetCodProdus());
         strcpy(numeProdus, nodCrt->GetNumeProdus().c_str());
-        itoa(nodCrt->GetCantitateProdus(), cantitateProdus, 10);
+        sprintf(cantitateProdus, "%d", nodCrt->GetCantitateProdus());
         sprintf(pretProdus, "%.2f", nodCrt->GetPretProdus());
         listaProduse.add_row({codProdus, numeProdus, cantitateProdus, pretProdus});
         if (nodCrt->GetCantitateProdus() == 0)
         {
             listaProduse[counter][0].format()
-                    .font_style({FontStyle::crossed})
-                    .font_color(Color::red)
-                    .corner_top_left("*")
-                    .corner_top_right("*")
-                    .corner_bottom_left("*")
-                    .corner_bottom_right("*")
-                    .corner_top_left_color(Color::red)
-                    .corner_top_right_color(Color::red)
-                    .corner_bottom_left_color(Color::red)
-                    .corner_bottom_right_color(Color::red)
-                    .font_align(FontAlign::center)
-                    .border_top("~")
-                    .border_bottom("~")
-                    .border_left("|")
-                    .border_right("|")
-                    .border_left_color(Color::red)
-                    .border_right_color(Color::red)
-                    .border_top_color(Color::cyan)
-                    .border_bottom_color(Color::cyan);
+                    .font_style({FontStyle::bold})
+                    .font_align(FontAlign::center);
             listaProduse[counter][1].format()
-                    .font_style({FontStyle::crossed})
-                    .font_color(Color::red)
-                    .corner_top_left("*")
-                    .corner_top_right("*")
-                    .corner_bottom_left("*")
-                    .corner_bottom_right("*")
-                    .corner_top_left_color(Color::red)
-                    .corner_top_right_color(Color::red)
-                    .corner_bottom_left_color(Color::red)
-                    .corner_bottom_right_color(Color::red)
-                    .font_align(FontAlign::center)
-                    .border_top("~")
-                    .border_bottom("~")
-                    .border_left("|")
-                    .border_right("|")
-                    .border_left_color(Color::red)
-                    .border_right_color(Color::red)
-                    .border_top_color(Color::cyan)
-                    .border_bottom_color(Color::cyan);
+                    .font_style({FontStyle::bold})
+                    .font_align(FontAlign::center);
             listaProduse[counter][2].format()
-                    .font_style({FontStyle::crossed})
+                    .font_style({FontStyle::bold})
                     .font_color(Color::red)
-                    .corner_top_left("*")
-                    .corner_top_right("*")
-                    .corner_bottom_left("*")
-                    .corner_bottom_right("*")
-                    .corner_top_left_color(Color::red)
-                    .corner_top_right_color(Color::red)
-                    .corner_bottom_left_color(Color::red)
-                    .corner_bottom_right_color(Color::red)
-                    .font_align(FontAlign::center)
-                    .border_top("~")
-                    .border_bottom("~")
-                    .border_left("|")
-                    .border_right("|")
-                    .border_left_color(Color::red)
-                    .border_right_color(Color::red)
-                    .border_top_color(Color::cyan)
-                    .border_bottom_color(Color::cyan);
+                    .font_align(FontAlign::center);
             listaProduse[counter][3].format()
-                    .font_style({FontStyle::crossed})
-                    .font_color(Color::red)
-                    .corner_top_left("*")
-                    .corner_top_right("*")
-                    .corner_bottom_left("*")
-                    .corner_bottom_right("*")
-                    .corner_top_left_color(Color::red)
-                    .corner_top_right_color(Color::red)
-                    .corner_bottom_left_color(Color::red)
-                    .corner_bottom_right_color(Color::red)
-                    .font_align(FontAlign::center)
-                    .border_top("~")
-                    .border_bottom("~")
-                    .border_left("|")
-                    .border_right("|")
-                    .border_left_color(Color::red)
-                    .border_right_color(Color::red)
-                    .border_top_color(Color::cyan)
-                    .border_bottom_color(Color::cyan);
+                    .font_style({FontStyle::bold})
+                    .font_align(FontAlign::center);
         } else
         {
             listaProduse[counter][0].format()
-                    .font_color(Color::cyan)
-                    .corner_top_left("*")
-                    .corner_top_right("*")
-                    .corner_bottom_left("*")
-                    .corner_bottom_right("*")
-                    .corner_top_left_color(Color::red)
-                    .corner_top_right_color(Color::red)
-                    .corner_bottom_left_color(Color::red)
-                    .corner_bottom_right_color(Color::red)
-                    .font_align(FontAlign::center)
-                    .border_top("~")
-                    .border_bottom("~")
-                    .border_left("|")
-                    .border_right("|")
-                    .border_left_color(Color::cyan)
-                    .border_right_color(Color::cyan)
-                    .border_top_color(Color::cyan)
-                    .border_bottom_color(Color::cyan);
+                    .font_style({FontStyle::bold})
+                    .font_align(FontAlign::center);
             listaProduse[counter][1].format()
-                    .font_color(Color::cyan)
-                    .corner_top_left("*")
-                    .corner_top_right("*")
-                    .corner_bottom_left("*")
-                    .corner_bottom_right("*")
-                    .corner_top_left_color(Color::red)
-                    .corner_top_right_color(Color::red)
-                    .corner_bottom_left_color(Color::red)
-                    .corner_bottom_right_color(Color::red)
-                    .font_align(FontAlign::center)
-                    .border_top("~")
-                    .border_bottom("~")
-                    .border_left("|")
-                    .border_right("|")
-                    .border_left_color(Color::cyan)
-                    .border_right_color(Color::cyan)
-                    .border_top_color(Color::cyan)
-                    .border_bottom_color(Color::cyan);
+                    .font_style({FontStyle::bold})
+                    .font_align(FontAlign::center);
             listaProduse[counter][2].format()
-                    .font_color(Color::cyan)
-                    .corner_top_left("*")
-                    .corner_top_right("*")
-                    .corner_bottom_left("*")
-                    .corner_bottom_right("*")
-                    .corner_top_left_color(Color::red)
-                    .corner_top_right_color(Color::red)
-                    .corner_bottom_left_color(Color::red)
-                    .corner_bottom_right_color(Color::red)
-                    .font_align(FontAlign::center)
-                    .border_top("~")
-                    .border_bottom("~")
-                    .border_left("|")
-                    .border_right("|")
-                    .border_left_color(Color::cyan)
-                    .border_right_color(Color::cyan)
-                    .border_top_color(Color::cyan)
-                    .border_bottom_color(Color::cyan);
+                    .font_style({FontStyle::bold})
+                    .font_color(Color::green)
+                    .font_align(FontAlign::center);
             listaProduse[counter][3].format()
-                    .font_color(Color::cyan)
-                    .corner_top_left("*")
-                    .corner_top_right("*")
-                    .corner_bottom_left("*")
-                    .corner_bottom_right("*")
-                    .corner_top_left_color(Color::red)
-                    .corner_top_right_color(Color::red)
-                    .corner_bottom_left_color(Color::red)
-                    .corner_bottom_right_color(Color::red)
-                    .font_align(FontAlign::center)
-                    .border_top("~")
-                    .border_bottom("~")
-                    .border_left("|")
-                    .border_right("|")
-                    .border_left_color(Color::cyan)
-                    .border_right_color(Color::cyan)
-                    .border_top_color(Color::cyan)
-                    .border_bottom_color(Color::cyan);
+                    .font_style({FontStyle::bold})
+                    .font_align(FontAlign::center);
         }
         nodCrt = nodCrt->GetNext();
         counter++;
@@ -507,6 +326,7 @@ int Lista::GenereazaCodProdus()
             return _coduriProdus[i];
         }
     }
+    return -1;
 }
 
 void Lista::ImportStoc()

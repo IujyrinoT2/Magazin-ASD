@@ -237,3 +237,4 @@ Meniu::~Meniu()
 {
     delete this->_stocProduse;
 }
+
