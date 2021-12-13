@@ -3,6 +3,7 @@
 Meniu::Meniu()
 {
     this->_stocProduse = new Lista;
+    this->_stocProduse->ImportStoc();
 }
 
 void Meniu::AfisareMeniu()
