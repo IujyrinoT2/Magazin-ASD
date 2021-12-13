@@ -103,13 +103,13 @@ void Meniu::AfisareMeniu()
             }
                 break;
             case 5: //Afisare produse
-            { ;
+            {
                 this->_stocProduse->AfiseazaLista();
                 cout << endl;
             }
                 break;
             case 101: //Modificare denumire
-            { ;
+            {
                 int codProdus;
                 string denumireProdus;
                 cout << "Introduceti codul produsului pe care vreti sa il modificati: ";
@@ -123,7 +123,7 @@ void Meniu::AfisareMeniu()
             }
                 break;
             case 102: //Modificare cantitate
-            { ;
+            {
                 int codProdus;
                 int cantitateProdus;
                 cout << "Introduceti codul produsului pe care vreti sa il modificati: ";
@@ -137,7 +137,7 @@ void Meniu::AfisareMeniu()
             }
                 break;
             case 103: //Modificare denumire pret
-            { ;
+            {
                 int codProdus;
                 float pretProdus;
                 cout << "Introduceti codul produsului pe care vreti sa il modificati: ";
@@ -149,8 +149,11 @@ void Meniu::AfisareMeniu()
                 this->_stocProduse->CautaProdus(codProdus)->SetPretProdus(pretProdus);
                 cout << endl;
             }
+                break;
             case 800: //Importa stoc
             {
+                this->_stocProduse->~Lista();
+                this->_stocProduse = new Lista;
                 this->_stocProduse->ImportStoc();
             }
                 break;

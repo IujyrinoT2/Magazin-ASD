@@ -304,9 +304,6 @@ void Lista::ImportStoc() {
     int cantitateProdus, nrElem, cod;
     string trashCan;
 
-    this->~Lista();
-    this->_coduriProdus = vector<int>(899, 0);
-
     ifstream fin("Stoc.csv");
 
     if (!fin)
