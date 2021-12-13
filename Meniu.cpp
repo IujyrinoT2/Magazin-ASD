@@ -23,11 +23,43 @@ void Meniu::AfisareMeniu()
     tabelMeniu.add_row({"1001", "Afiseaza optiuni"});
     tabelMeniu.add_row({"0", "Iesire din program"});
     tabelMeniu[0].format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
+            .font_color(Color::green)
+            .font_align(FontAlign::center)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan)
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_bottom_left("*")
+            .corner_bottom_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .corner_bottom_left_color(Color::red)
+            .corner_bottom_right_color(Color::red);
     tabelMeniu.format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_bottom_left("*")
+            .corner_bottom_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .corner_bottom_left_color(Color::red)
+            .corner_bottom_right_color(Color::red)
+            .font_align(FontAlign::center)
+            .font_color(Color::cyan)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan);
     cout << tabelMeniu << endl;
     while (userInput)
     {
@@ -161,11 +193,43 @@ void Meniu::AfiseazaOptiuni()
     tabelMeniu.add_row({"1001", "Afiseaza optiuni"});
     tabelMeniu.add_row({"0", "Iesire din program"});
     tabelMeniu[0].format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
+            .font_color(Color::green)
+            .font_align(FontAlign::center)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan)
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_bottom_left("*")
+            .corner_bottom_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .corner_bottom_left_color(Color::red)
+            .corner_bottom_right_color(Color::red);
     tabelMeniu.format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_bottom_left("*")
+            .corner_bottom_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .corner_bottom_left_color(Color::red)
+            .corner_bottom_right_color(Color::red)
+            .font_align(FontAlign::center)
+            .font_color(Color::cyan)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan);
     cout << tabelMeniu << endl;
 }
 
@@ -173,3 +237,4 @@ Meniu::~Meniu()
 {
     delete this->_stocProduse;
 }
+
