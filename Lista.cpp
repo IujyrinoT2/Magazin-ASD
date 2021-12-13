@@ -1,5 +1,5 @@
 #include "Lista.h"
-
+#include <cstring>
 Lista::Lista()
 {
     this->_HEAD = new Produs;
@@ -8,8 +8,6 @@ Lista::Lista()
 
 void Lista::AdaugaProdus()
 {
-    Produs *produsNou = new Produs;
-
     string numeProdusNou;
     int cantitateProdusNou;
     float pretProdusNou;
@@ -26,24 +24,50 @@ void Lista::AdaugaProdus()
     cin >> cantitateProdusNou;
     cout << endl;
 
-    produsNou->SetCodProdus(GenereazaCodProdus());
-    produsNou->SetNumeProdus(numeProdusNou);
-    produsNou->SetPretProdus(pretProdusNou);
-    produsNou->SetCantitateProdus(cantitateProdusNou);
-    produsNou->SetNext(NULL);
+    std::cout.setstate(std::ios_base::failbit); //Opresc bufferul pt output ca functia sa nu mai afiseze text
+    Produs* numeExistent = CautaProdus(numeProdusNou);
+    std::cout.clear();//Repornesc bufferul pt output
+     if(numeExistent != NULL)
+     {
+         std::cout<<"Produsul deja exista, doriti sa ii cresteti stocul ? (Y/N) "<<endl;
+         char optiune;
+         std::cin>>optiune;
+         switch (optiune) {
+             case 'Y':
+             case 'y':
+                 numeExistent->SetCantitateProdus(numeExistent->GetCantitateProdus()+cantitateProdusNou);//setez cantitatea produsului existent cu cantitatea sa + cantitate noua
 
-    if (this->_HEAD != NULL)
-    {
-        Produs *produsCurent = this->_HEAD;
-        while (produsCurent->GetNext() != NULL)
-        {
-            produsCurent = produsCurent->GetNext();
-        }
-        produsCurent->SetNext(produsNou);
-    } else
-    {
-        this->_HEAD = produsNou;
+
+             break;
+
+             case'N':
+             case'n':
+                std::cout<<"Cantitatea produsului original a ramas neschimbata";
+             break;
+         }
+     }else{
+         Produs* produsNou = new Produs;
+         produsNou->SetCodProdus(GenereazaCodProdus());
+         produsNou->SetNumeProdus(numeProdusNou);
+         produsNou->SetPretProdus(pretProdusNou);
+         produsNou->SetCantitateProdus(cantitateProdusNou);
+         produsNou->SetNext(NULL);
+
+         if (this->_HEAD != NULL)
+         {
+             Produs *produsCurent = this->_HEAD;
+             while (produsCurent->GetNext() != NULL)
+             {
+                 produsCurent = produsCurent->GetNext();
+             }
+             produsCurent->SetNext(produsNou);
+         } else
+         {
+             this->_HEAD = produsNou;
+         }
     }
+
+
 }
 
 void Lista::StergeProdus(int codProdus)
@@ -242,6 +266,27 @@ Produs *Lista::CautaProdus(int codCautat)
         return NULL;
     }
     return cod;
+}
+
+Produs *Lista::CautaProdus(string numeCautat)
+{
+    Produs *nume = this->_HEAD;
+    if (this->_HEAD == NULL)
+    {
+        std::cout << "Nu exista produse pe stoc" << std::endl;
+        return NULL;
+    }
+    while (nume->GetNext() != NULL && nume->GetNumeProdus().find(numeCautat) == std::string::npos)
+    {
+        nume = nume->GetNext();
+    }
+    if (nume->GetNext() == NULL && nume->GetNumeProdus().find(numeCautat) == std::string::npos)
+    {
+        std::cout << "Numele cautat nu a fost gasit" << std::endl;
+        return NULL;
+    }
+    return nume;
+
 }
 
 bool Lista::ValideazaStoc(int cantitateCumparata, Produs *produsCurent)

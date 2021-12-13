@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <vector>
 #include <fstream>
 #include "single_include/tabulate/tabulate.hpp"
