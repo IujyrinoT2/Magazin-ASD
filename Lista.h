@@ -15,6 +15,7 @@ public:
     void AfiseazaProdus(Produs *produsCautat);
     void CumparaProdus(int codProdus);
     Produs* CautaProdus(int codProdus);
+    Produs* CautaProdus(string numeProdus);
     bool ValideazaStoc(int cantitateCumparata, Produs *produsCurent);
     void AfiseazaLista();
     int GenereazaCodProdus();
