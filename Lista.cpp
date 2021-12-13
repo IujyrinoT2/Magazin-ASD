@@ -15,7 +15,9 @@ void Lista::AdaugaProdus()
     float pretProdusNou;
 
     cout << "Introduceti denumirea noului produs: ";
-    cin >> numeProdusNou;
+    cin.clear();
+    cin.sync();
+    getline(cin,numeProdusNou);
     cout << endl;
     cout << "Introduceti pretul noului produs: ";
     cin >> pretProdusNou;
