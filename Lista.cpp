@@ -252,20 +252,34 @@ bool Lista::ValideazaStoc(int cantitateCumparata, Produs *produsCurent)
 void Lista::AfiseazaLista()
 {
     Table listaProduse;
+    listaProduse.format()
+            .font_align(FontAlign::center)
+            .border_top("~")
+            .border_bottom("~")
+            .border_left("|")
+            .border_right("|")
+            .border_left_color(Color::cyan)
+            .border_right_color(Color::cyan)
+            .border_top_color(Color::cyan)
+            .border_bottom_color(Color::cyan)
+            .corner_top_left("*")
+            .corner_top_right("*")
+            .corner_bottom_left("*")
+            .corner_bottom_right("*")
+            .corner_top_left_color(Color::red)
+            .corner_top_right_color(Color::red)
+            .corner_bottom_left_color(Color::red)
+            .corner_bottom_right_color(Color::red);
     listaProduse.add_row(
             {"COD PRODUS", "DENUMIRE PRODUS", "CANTITATE", "PRET"});
     listaProduse[0][0].format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
+            .font_style({FontStyle::bold});
     listaProduse[0][1].format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
+            .font_style({FontStyle::bold});
     listaProduse[0][2].format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
+            .font_style({FontStyle::bold});
     listaProduse[0][3].format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
+            .font_style({FontStyle::bold});
     Produs *nodCrt = this->_HEAD->GetNext();
     int counter = 1;
     while (nodCrt != NULL)
