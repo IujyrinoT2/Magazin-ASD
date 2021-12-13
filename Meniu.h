@@ -9,8 +9,9 @@ private:
     Lista *_stocProduse;
 public:
     Meniu();
-    void AfisareMeniu();
-    void AfiseazaOptiuni();
+    void Dispatcher();
+    Table GenereazaMeniuOptiuni();
+    Table GenereazaAfisaj();
     ~Meniu();
 };
 

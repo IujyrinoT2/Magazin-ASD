@@ -3,7 +3,8 @@
 int main()
 {
     Meniu *test = new Meniu;
-    test->AfisareMeniu();
+    cout<<test->GenereazaAfisaj()<<endl;
+    test->Dispatcher();
     delete test;
     return 0;
 }
