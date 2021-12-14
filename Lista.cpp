@@ -112,104 +112,8 @@ void Lista::AfiseazaProdus(Produs *produsCautat)
     char pretProdus[20];
     sprintf(pretProdus, "%.2f", produsCautat->GetPretProdus());
     afisareElement.add_row({"COD PRODUS", "DENUMIRE PRODUS", "CANTITATE", "PRET"});
-    afisareElement[0][0].format()
-            .corner_top_left("*")
-            .corner_top_right("*")
-            .corner_bottom_left("*")
-            .corner_bottom_right("*")
-            .corner_top_left_color(Color::red)
-            .corner_top_right_color(Color::red)
-            .corner_bottom_left_color(Color::red)
-            .corner_bottom_right_color(Color::red)
-            .font_align(FontAlign::center)
-            .font_color(Color::green)
-            .border_top("~")
-            .border_bottom("~")
-            .border_left("|")
-            .border_right("|")
-            .border_left_color(Color::cyan)
-            .border_right_color(Color::cyan)
-            .border_top_color(Color::cyan)
-            .border_bottom_color(Color::cyan);
-    afisareElement[0][1].format()
-            .corner_top_left("*")
-            .corner_top_right("*")
-            .corner_bottom_left("*")
-            .corner_bottom_right("*")
-            .corner_top_left_color(Color::red)
-            .corner_top_right_color(Color::red)
-            .corner_bottom_left_color(Color::red)
-            .corner_bottom_right_color(Color::red)
-            .font_align(FontAlign::center)
-            .font_color(Color::green)
-            .border_top("~")
-            .border_bottom("~")
-            .border_left("|")
-            .border_right("|")
-            .border_left_color(Color::cyan)
-            .border_right_color(Color::cyan)
-            .border_top_color(Color::cyan)
-            .border_bottom_color(Color::cyan);
-    afisareElement[0][2].format()
-            .corner_top_left("*")
-            .corner_top_right("*")
-            .corner_bottom_left("*")
-            .corner_bottom_right("*")
-            .corner_top_left_color(Color::red)
-            .corner_top_right_color(Color::red)
-            .corner_bottom_left_color(Color::red)
-            .corner_bottom_right_color(Color::red)
-            .font_align(FontAlign::center)
-            .font_color(Color::green)
-            .border_top("~")
-            .border_bottom("~")
-            .border_left("|")
-            .border_right("|")
-            .border_left_color(Color::cyan)
-            .border_right_color(Color::cyan)
-            .border_top_color(Color::cyan)
-            .border_bottom_color(Color::cyan);
-    afisareElement[0][3].format()
-            .corner_top_left("*")
-            .corner_top_right("*")
-            .corner_bottom_left("*")
-            .corner_bottom_right("*")
-            .corner_top_left_color(Color::red)
-            .corner_top_right_color(Color::red)
-            .corner_bottom_left_color(Color::red)
-            .corner_bottom_right_color(Color::red)
-            .font_align(FontAlign::center)
-            .font_color(Color::green)
-            .border_top("~")
-            .border_bottom("~")
-            .border_left("|")
-            .border_right("|")
-            .border_left_color(Color::cyan)
-            .border_right_color(Color::cyan)
-            .border_top_color(Color::cyan)
-            .border_bottom_color(Color::cyan);
-
     afisareElement.add_row({to_string(produsCautat->GetCodProdus()), produsCautat->GetNumeProdus(),
                             to_string(produsCautat->GetCantitateProdus()), pretProdus});
-    afisareElement.format()
-            .corner_top_left("*")
-            .corner_top_right("*")
-            .corner_bottom_left("*")
-            .corner_bottom_right("*")
-            .corner_top_left_color(Color::red)
-            .corner_top_right_color(Color::red)
-            .corner_bottom_left_color(Color::red)
-            .corner_bottom_right_color(Color::red)
-            .font_align(FontAlign::center)
-            .font_color(Color::cyan)
-            .border_top("~")
-            .border_bottom("~")
-            .border_left("|")
-            .border_right("|")
-            .border_left_color(Color::cyan)
-            .border_right_color(Color::cyan)
-            .border_top_color(Color::cyan)
-            .border_bottom_color(Color::cyan);
     cout << afisareElement << endl;
 }
 
@@ -294,25 +198,14 @@ bool Lista::ValideazaStoc(int cantitateCumparata, Produs *produsCurent)
     return 0 <= produsCurent->GetCantitateProdus() - cantitateCumparata;
 }
 
-void Lista::AfiseazaLista()
+Table Lista::GenereazaLista()
 {
     Table listaProduse;
+    listaProduse.format()
+            .font_align(FontAlign::center);
     listaProduse.add_row(
             {"COD PRODUS", "DENUMIRE PRODUS", "CANTITATE", "PRET"});
-    listaProduse[0][0].format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
-    listaProduse[0][1].format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
-    listaProduse[0][2].format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
-    listaProduse[0][3].format()
-            .font_style({FontStyle::bold})
-            .font_align(FontAlign::center);
     Produs *nodCrt = this->_HEAD->GetNext();
-    int counter = 1;
     while (nodCrt != NULL)
     {
         char codProdus[3];
@@ -324,41 +217,9 @@ void Lista::AfiseazaLista()
         sprintf(cantitateProdus, "%d", nodCrt->GetCantitateProdus());
         sprintf(pretProdus, "%.2f", nodCrt->GetPretProdus());
         listaProduse.add_row({codProdus, numeProdus, cantitateProdus, pretProdus});
-        if (nodCrt->GetCantitateProdus() == 0)
-        {
-            listaProduse[counter][0].format()
-                    .font_style({FontStyle::bold})
-                    .font_align(FontAlign::center);
-            listaProduse[counter][1].format()
-                    .font_style({FontStyle::bold})
-                    .font_align(FontAlign::center);
-            listaProduse[counter][2].format()
-                    .font_style({FontStyle::bold})
-                    .font_color(Color::red)
-                    .font_align(FontAlign::center);
-            listaProduse[counter][3].format()
-                    .font_style({FontStyle::bold})
-                    .font_align(FontAlign::center);
-        } else
-        {
-            listaProduse[counter][0].format()
-                    .font_style({FontStyle::bold})
-                    .font_align(FontAlign::center);
-            listaProduse[counter][1].format()
-                    .font_style({FontStyle::bold})
-                    .font_align(FontAlign::center);
-            listaProduse[counter][2].format()
-                    .font_style({FontStyle::bold})
-                    .font_color(Color::green)
-                    .font_align(FontAlign::center);
-            listaProduse[counter][3].format()
-                    .font_style({FontStyle::bold})
-                    .font_align(FontAlign::center);
-        }
         nodCrt = nodCrt->GetNext();
-        counter++;
     }
-    cout << listaProduse << endl;
+    return listaProduse;
 }
 
 int Lista::GenereazaCodProdus()

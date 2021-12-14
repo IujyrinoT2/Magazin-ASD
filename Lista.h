@@ -17,7 +17,7 @@ public:
     Produs* CautaProdus(int codProdus);
     Produs* CautaProdus(string numeProdus);
     bool ValideazaStoc(int cantitateCumparata, Produs *produsCurent);
-    void AfiseazaLista();
+    Table GenereazaLista();
     int GenereazaCodProdus();
     void ImportStoc();
     void ExportStoc();
