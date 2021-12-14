@@ -303,11 +303,15 @@ void Lista::ImportStoc() {
     float pretProdus;
     int cantitateProdus, nrElem, cod;
     string trashCan;
-
-    ifstream fin("Stoc.csv");
+    string src;
+    cout << "Introduceti calea catre fisierul din care se importa: ";
+    cin.clear();
+    cin.sync();
+    getline(cin, src);
+    ifstream fin(src);
 
     if (!fin)
-        cout << "Eroare la deschiderea fisierului Stoc.csv\n Asigurati-va ca fiserul este inchis!\n";
+        cout << "Eroare la deschiderea fisierului " << src << endl << " Asigurati-va ca fiserul este inchis!\n";
 
     getline(fin, linie);
 
@@ -365,9 +369,14 @@ void Lista::ImportStoc() {
 }
 
 void Lista::ExportStoc() {
-    ofstream fout("Stoc.csv");
+    string src;
+    cout << "Introduceti calea catre fisierul catre care se exporta: ";
+    cin.clear();
+    cin.sync();
+    getline(cin, src);
+    ofstream fout(src);
     if (!fout)
-        cout << "Eroare la deschiderea fisierului Stoc.csv\n Asigurati-va ca fiserul este inchis!\n";
+        cout << "Eroare la deschiderea fisierului " << src << endl << " Asigurati-va ca fiserul este inchis!\n";
 
     fout << "Cod produs" << "," << "Denumire produs" << "," << "Cantitate produs" << "," << "Pret produs" << endl;
     Produs *p = this->_HEAD->GetNext();
@@ -377,6 +386,7 @@ void Lista::ExportStoc() {
         p = p->GetNext();
     }
     fout.close();
+    cout << "\n Fisier exportat cu succes\n";
 }
 
 Lista::~Lista() {
