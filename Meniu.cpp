@@ -3,6 +3,7 @@
 Meniu::Meniu()
 {
     this->_stocProduse = new Lista;
+    this->_stocProduse->ImportStoc();
 }
 
 
@@ -65,7 +66,13 @@ void Meniu::Dispatcher()
                 cout << GenereazaAfisaj() << endl;
             }
                 break;
-            case 5: //Modificare denumire
+            case 5: //Afisare produse
+            {
+                this->_stocProduse->AfiseazaLista();
+                cout << endl;
+            }
+                break;
+            case 101: //Modificare denumire
             {
                 int codProdus;
                 string denumireProdus;
@@ -84,7 +91,7 @@ void Meniu::Dispatcher()
                 cout << GenereazaAfisaj() << endl;
             }
                 break;
-            case 6: //Modificare cantitate
+            case 102: //Modificare cantitate
             {
                 int codProdus;
                 int cantitateProdus;
@@ -103,7 +110,7 @@ void Meniu::Dispatcher()
                 cout << GenereazaAfisaj() << endl;
             }
                 break;
-            case 7: //Modificare denumire pret
+            case 103: //Modificare denumire pret
             {
                 int codProdus;
                 float pretProdus;
@@ -121,8 +128,11 @@ void Meniu::Dispatcher()
                 system("cls");
                 cout << GenereazaAfisaj() << endl;
             }
-            case 8: //Importa stoc
+                break;
+            case 800: //Importa stoc
             {
+                this->_stocProduse->~Lista();
+                this->_stocProduse = new Lista;
                 this->_stocProduse->ImportStoc();
                 system("cls");
                 cout << GenereazaAfisaj() << endl;

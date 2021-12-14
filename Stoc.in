@@ -1,7 +1,6 @@
-denumire cantitate pret
-p1 505 100
-p2 515 102
-p3 666 777
-p4 0 100
-p5 515 102
-p6 0 777
+Cod produs,Denumire produs,Cantitate produs,Pret produs
+100,produs 1,10,100.699
+101,produs 2,20,200.7
+102,produs 3,30,300.56
+103,produs 4,40,400.32
+104,produs 5,50,500.2
