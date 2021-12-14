@@ -224,6 +224,10 @@ void Lista::ImportStoc() {
     cin.clear();
     cin.sync();
     getline(cin, src);
+    if(src.empty()) {
+        cout << "Nici-o sursa primita\n";
+        return;
+    }
     ifstream fin(src);
 
     if (!fin)
@@ -233,7 +237,6 @@ void Lista::ImportStoc() {
 
     while (getline(fin, linie)) {
         Produs *produsNou = new Produs;
-        cout << "###Test linie: " << linie << "###\n";
 
         nrElem = -1;
         for (int i = 0; i < linie.size() + 1; i++) {
@@ -244,23 +247,18 @@ void Lista::ImportStoc() {
                 if (nrElem == 0) {
                     cod = stoi(cuvant, nullptr, 10);
                     produsNou->SetCodProdus(cod);
-                    cout << "\nTest cod: " << cod << endl;
-                    cout << "\nTest codString: " << cuvant << endl;
 
                     this->_coduriProdus[cod - 100] = cod;
 
                     cuvant.erase();
                 } else if (nrElem == 1) {
                     numeProdus = cuvant;
-                    cout << "\nTest nume: " << cuvant << endl;
                     cuvant.erase();
                 } else if (nrElem == 2) {
                     cantitateProdus = stoi(cuvant, nullptr, 10);
-                    cout << "\nTest cantitate:" << cuvant << endl;
                     cuvant.erase();
                 } else if (nrElem == 3) {
                     pretProdus = stof(cuvant, nullptr);
-                    cout << "\nTest pret:" << cuvant << endl;
                     cuvant.erase();
                 }
             }
@@ -290,6 +288,10 @@ void Lista::ExportStoc() {
     cin.clear();
     cin.sync();
     getline(cin, src);
+    if(src.empty()) {
+        cout << "Nici-o sursa primita\n";
+        return;
+    }
     ofstream fout(src);
     if (!fout)
         cout << "Eroare la deschiderea fisierului " << src << endl << " Asigurati-va ca fiserul este inchis!\n";
