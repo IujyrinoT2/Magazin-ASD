@@ -19,8 +19,20 @@ public:
     bool ValideazaStoc(int cantitateCumparata, Produs *produsCurent);
     Table GenereazaLista();
     int GenereazaCodProdus();
+
     void ImportStoc();
     void ExportStoc();
+
+    bool ValideazaCod(int codProdus);
+    string ValideazaNume();
+    int ValideazaCantitate();
+    float ValideazaPret();
+
+    int TryGetCantitate(string cantitateProdus);
+    float TryGetPret(string pretProdus);
+
+
+
     ~Lista();
 };
 
