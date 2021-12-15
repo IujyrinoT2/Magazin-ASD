@@ -3,6 +3,7 @@
 Meniu::Meniu()
 {
     this->_stocProduse = new Lista;
+    this->_stocProduse->ImportStoc();
 }
 
 
@@ -65,6 +66,13 @@ void Meniu::Dispatcher()
                 cout << GenereazaAfisaj() << endl;
             }
                 break;
+         /*   case 5: //Afisare produse
+            {
+                this->_stocProduse->GenereazaLista();
+                cout << endl;
+            }
+                break;
+         */
             case 5: //Modificare denumire
             {
                 int codProdus;
@@ -73,7 +81,9 @@ void Meniu::Dispatcher()
                 cin >> codProdus;
                 cout << endl;
                 cout << "Introduceti noul nume al produsului: ";
-                cin >> denumireProdus;
+                cin.clear();
+                cin.sync();
+                getline(cin,denumireProdus);
                 cout << endl;
                 this->_stocProduse->CautaProdus(codProdus)->SetNumeProdus(denumireProdus);
                 string continuam;
@@ -121,8 +131,11 @@ void Meniu::Dispatcher()
                 system("cls");
                 cout << GenereazaAfisaj() << endl;
             }
+                break;
             case 8: //Importa stoc
             {
+                this->_stocProduse->~Lista();
+                this->_stocProduse = new Lista;
                 this->_stocProduse->ImportStoc();
                 system("cls");
                 cout << GenereazaAfisaj() << endl;
@@ -160,8 +173,8 @@ Table Meniu::GenereazaMeniuOptiuni()
     optiuni.add_row({"5. Modificare denumire produs"});
     optiuni.add_row({"6. Modificare cantitate produs"});
     optiuni.add_row({"7. Modificare pret produs"});
-    optiuni.add_row({"8. Importa produse (Stoc.in)"});
-    optiuni.add_row({"9. Exporta stoc (Stoc.csv)"});
+    optiuni.add_row({"8. Importa produse"});
+    optiuni.add_row({"9. Exporta stoc"});
     optiuni.add_row({"0. Iesire din program"});
     return optiuni;
 }

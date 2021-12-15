@@ -12,6 +12,7 @@ void Lista::AdaugaProdus()
     int cantitateProdusNou = ValideazaCantitate();
     float pretProdusNou = ValideazaPret();
 
+
     std::cout.setstate(std::ios_base::failbit); //Opresc bufferul pt output ca functia sa nu mai afiseze text
     Produs* numeExistent = CautaProdus(numeProdusNou);
     std::cout.clear();//Repornesc bufferul pt output
@@ -59,30 +60,23 @@ void Lista::AdaugaProdus()
 
 }
 
-void Lista::StergeProdus(int codProdus)
-{
+void Lista::StergeProdus(int codProdus) {
     Produs *p = CautaProdus(codProdus);
-    if (p == NULL)
-    {
+    if (p == NULL) {
         cout << "Produsul nu a fost gasit";
         return;
     }
-    for (int i = 0; i < 899; i++)
-    {
-        if (_coduriProdus[i] == codProdus)
-        {
+    for (int i = 0; i < 899; i++) {
+        if (_coduriProdus[i] == codProdus) {
             _coduriProdus[i] = 0;
         }
     }
-    if (this->_HEAD->GetNext() == p)
-    {
+    if (this->_HEAD->GetNext() == p) {
         this->_HEAD->SetNext(p->GetNext());
         delete p;
-    } else
-    {
+    } else {
         Produs *p_aux = this->_HEAD;
-        while (p_aux->GetNext() != p)
-        {
+        while (p_aux->GetNext() != p) {
             p_aux = p_aux->GetNext();
         }
         p_aux->SetNext(p->GetNext());
@@ -90,10 +84,8 @@ void Lista::StergeProdus(int codProdus)
     }
 }
 
-void Lista::AfiseazaProdus(Produs *produsCautat)
-{
-    if (produsCautat == NULL)
-    {
+void Lista::AfiseazaProdus(Produs *produsCautat) {
+    if (produsCautat == NULL) {
         return;
     }
 
@@ -106,11 +98,9 @@ void Lista::AfiseazaProdus(Produs *produsCautat)
     cout << afisareElement << endl;
 }
 
-void Lista::CumparaProdus(int codProdus)
-{
+void Lista::CumparaProdus(int codProdus) {
     Produs *p = CautaProdus(codProdus);
-    if (p == NULL)
-    {
+    if (p == NULL) {
         cout << "Nu s-a gasit produsul" << endl;
         return;
     }
@@ -119,42 +109,35 @@ void Lista::CumparaProdus(int codProdus)
     cin >> cantitateCumparata;
     cout << endl;
 
-    while (cantitateCumparata < 0)
-    {
+    while (cantitateCumparata < 0) {
         cout << "Introduceti o cantitate cumparata valida: ";
         cin >> cantitateCumparata;
         cout << endl;
     }
 
-    if (!ValideazaStoc(cantitateCumparata, CautaProdus(codProdus)))
-    {
+    if (!ValideazaStoc(cantitateCumparata, CautaProdus(codProdus))) {
         cout << "Stoc insuficient" << endl;
         return;
     }
 
     p->SetCantitateProdus(p->GetCantitateProdus() - cantitateCumparata);
 
-    if (!p->GetCantitateProdus())
-    {
+    if (!p->GetCantitateProdus()) {
         cout << "Cantitatea acestui produs a ajuns la 0." << endl;
         StergeProdus(codProdus);
     }
 }
 
-Produs *Lista::CautaProdus(int codCautat)
-{
+Produs *Lista::CautaProdus(int codCautat) {
     Produs *cod = this->_HEAD;
-    if (this->_HEAD == NULL)
-    {
+    if (this->_HEAD == NULL) {
         std::cout << "Nu exista produse pe stoc" << std::endl;
         return NULL;
     }
-    while (cod->GetNext() != NULL && cod->GetCodProdus() != codCautat)
-    {
+    while (cod->GetNext() != NULL && cod->GetCodProdus() != codCautat) {
         cod = cod->GetNext();
     }
-    if (cod->GetNext() == NULL && cod->GetCodProdus() != codCautat)
-    {
+    if (cod->GetNext() == NULL && cod->GetCodProdus() != codCautat) {
         std::cout << "Codul cautat nu a fost gasit" << std::endl;
         return NULL;
     }
@@ -211,12 +194,9 @@ Table Lista::GenereazaLista()
     return listaProduse;
 }
 
-int Lista::GenereazaCodProdus()
-{
-    for (int i = 0; i < 899; i++)
-    {
-        if (_coduriProdus[i] == 0)
-        {
+int Lista::GenereazaCodProdus() {
+    for (int i = 0; i < 899; i++) {
+        if (_coduriProdus[i] == 0) {
             _coduriProdus[i] = i + 100;
             return _coduriProdus[i];
         }
@@ -224,54 +204,99 @@ int Lista::GenereazaCodProdus()
     return -1;
 }
 
-void Lista::ImportStoc()
-{
-    string numeProdus;
+void Lista::ImportStoc() {
+    string numeProdus, linie, cuvant;
     float pretProdus;
-    int cantitateProdus;
+    int cantitateProdus, nrElem, cod;
     string trashCan;
-    char smallTrashcan;
+    string src;
+    cout << "Introduceti calea catre fisierul din care se importa: ";
+    cin.clear();
+    cin.sync();
+    getline(cin, src);
+    if(src.empty()) {
+        cout << "Nici-o sursa primita\n";
+        return;
+    }
+    ifstream fin(src);
 
-    ifstream fin("Stoc.in");
-    fin >> trashCan >> trashCan >> trashCan;
+    if (!fin)
+        cout << "Eroare la deschiderea fisierului " << src << endl << " Asigurati-va ca fiserul este inchis!\n";
 
-    while (fin >> numeProdus >> cantitateProdus >> pretProdus)
-    {
+    getline(fin, linie);
+
+    while (getline(fin, linie)) {
         Produs *produsNou = new Produs;
-        produsNou->SetCodProdus(GenereazaCodProdus());
+
+        nrElem = -1;
+        for (int i = 0; i < linie.size() + 1; i++) {
+            if (linie[i] != ',' && i < linie.size()) {
+                cuvant.push_back(linie[i]);
+            } else {
+                nrElem++;
+                if (nrElem == 0) {
+                    cod = stoi(cuvant, nullptr, 10);
+                    produsNou->SetCodProdus(cod);
+
+                    this->_coduriProdus[cod - 100] = cod;
+
+                    cuvant.erase();
+                } else if (nrElem == 1) {
+                    numeProdus = cuvant;
+                    cuvant.erase();
+                } else if (nrElem == 2) {
+                    cantitateProdus = stoi(cuvant, nullptr, 10);
+                    cuvant.erase();
+                } else if (nrElem == 3) {
+                    pretProdus = stof(cuvant, nullptr);
+                    cuvant.erase();
+                }
+            }
+        }
+
         produsNou->SetNumeProdus(numeProdus);
         produsNou->SetPretProdus(pretProdus);
         produsNou->SetCantitateProdus(cantitateProdus);
         produsNou->SetNext(NULL);
-        if (this->_HEAD != NULL)
-        {
+        if (this->_HEAD != NULL) {
             Produs *produsCurent = this->_HEAD;
-            while (produsCurent->GetNext() != NULL)
-            {
+            while (produsCurent->GetNext() != NULL) {
                 produsCurent = produsCurent->GetNext();
             }
             produsCurent->SetNext(produsNou);
-        } else
-        {
+        } else {
             this->_HEAD = produsNou;
         }
     }
+
     fin.close();
 }
 
-void Lista::ExportStoc()
-{
-    ofstream fout("Stoc.csv");
+void Lista::ExportStoc() {
+    string src;
+    cout << "Introduceti calea catre fisierul catre care se exporta: ";
+    cin.clear();
+    cin.sync();
+    getline(cin, src);
+    if(src.empty()) {
+        cout << "Nici-o sursa primita\n";
+        return;
+    }
+    ofstream fout(src);
+    if (!fout)
+        cout << "Eroare la deschiderea fisierului " << src << endl << " Asigurati-va ca fiserul este inchis!\n";
+
     fout << "Cod produs" << "," << "Denumire produs" << "," << "Cantitate produs" << "," << "Pret produs" << endl;
     Produs *p = this->_HEAD->GetNext();
-    while (p != NULL)
-    {
+    while (p != NULL) {
         fout << p->GetCodProdus() << "," << p->GetNumeProdus() << "," << p->GetCantitateProdus() << ","
              << p->GetPretProdus() << endl;
         p = p->GetNext();
     }
     fout.close();
+    cout << "\n Fisier exportat cu succes\n";
 }
+
 
 string Lista::ValideazaNume()
 {
@@ -344,11 +369,12 @@ float Lista::TryGetPret(string pretProdus) {
     }
 }
 
-Lista::~Lista()
+
+Lista::~Lista() 
 {
     Produs *n = NULL;
     Produs *c = this->_HEAD;
-    while (c != NULL)
+    while (c != NULL) 
     {
         n = c->GetNext();
         delete c;
