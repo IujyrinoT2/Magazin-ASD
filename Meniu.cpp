@@ -75,17 +75,14 @@ void Meniu::Dispatcher()
          */
             case 5: //Modificare denumire
             {
+                Lista lista;
                 int codProdus;
                 string denumireProdus;
                 cout << "Introduceti codul produsului pe care vreti sa il modificati: ";
                 cin >> codProdus;
                 cout << endl;
-                cout << "Introduceti noul nume al produsului: ";
-                cin.clear();
-                cin.sync();
-                getline(cin,denumireProdus);
-                cout << endl;
-                this->_stocProduse->CautaProdus(codProdus)->SetNumeProdus(denumireProdus);
+                string numeProdus = lista.ValideazaNume();
+                this->_stocProduse->CautaProdus(codProdus)->SetNumeProdus(numeProdus);
                 string continuam;
                 do{
                     cout<<"Continue?(y/n)"; cin >> continuam;
@@ -96,14 +93,12 @@ void Meniu::Dispatcher()
                 break;
             case 6: //Modificare cantitate
             {
+                Lista lista;
                 int codProdus;
-                int cantitateProdus;
                 cout << "Introduceti codul produsului pe care vreti sa il modificati: ";
                 cin >> codProdus;
                 cout << endl;
-                cout << "Introduceti noua cantitate a produsului: ";
-                cin >> cantitateProdus;
-                cout << endl;
+                int cantitateProdus = lista.ValideazaCantitate();
                 this->_stocProduse->CautaProdus(codProdus)->SetCantitateProdus(cantitateProdus);
                 string continuam;
                 do{
@@ -113,16 +108,14 @@ void Meniu::Dispatcher()
                 cout << GenereazaAfisaj() << endl;
             }
                 break;
-            case 7: //Modificare denumire pret
+            case 7: //Modificare pret
             {
+                Lista lista;
                 int codProdus;
-                float pretProdus;
                 cout << "Introduceti codul produsului pe care vreti sa il modificati: ";
                 cin >> codProdus;
                 cout << endl;
-                cout << "Introduceti noul pret al produsului: ";
-                cin >> pretProdus;
-                cout << endl;
+                float pretProdus = lista.ValideazaPret();
                 this->_stocProduse->CautaProdus(codProdus)->SetPretProdus(pretProdus);
                 string continuam;
                 do{
