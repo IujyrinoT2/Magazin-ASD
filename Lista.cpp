@@ -1,5 +1,6 @@
 #include "Lista.h"
 
+
 Lista::Lista()
 {
     this->_HEAD = new Produs;
@@ -208,6 +209,10 @@ void Lista::ImportStoc() {
     string numeProdus, linie, cuvant;
     float pretProdus;
     int cantitateProdus, nrElem, cod;
+    bool codOK=true,
+    numeOK =true ,
+    pretOK = true,
+    cantitateOK = true;
     string trashCan;
     string src;
     cout << "Introduceti calea catre fisierul din care se importa: ";
@@ -235,38 +240,90 @@ void Lista::ImportStoc() {
             } else {
                 nrElem++;
                 if (nrElem == 0) {
-                    cod = stoi(cuvant, nullptr, 10);
-                    produsNou->SetCodProdus(cod);
-
-                    this->_coduriProdus[cod - 100] = cod;
+                    try
+                    {
+                        cod = stoi(cuvant);
+                        if(cod <100 || cod>999)
+                        {
+                            cout<<"Codul a avut prea multe sau prea putine cifre"<<endl;
+                            codOK = false;
+                        }else
+                        {
+                            produsNou->SetCodProdus(cod);
+                            this->_coduriProdus[cod - 100] = cod;
+                        }
+                    }
+                    catch(...)
+                    {
+                        cout<<"Codul nu a fost format doar din cifre"<<endl;
+                        codOK = false;
+                    }
 
                     cuvant.erase();
                 } else if (nrElem == 1) {
                     numeProdus = cuvant;
+                    if(numeProdus.size() > 255){
+                        cout<<"Numele produsului a fost prea mare"<<endl;
+                        numeOK= false;
+                    }
                     cuvant.erase();
                 } else if (nrElem == 2) {
-                    cantitateProdus = stoi(cuvant, nullptr, 10);
+                    try
+                    {
+                        cantitateProdus = stoi(cuvant, nullptr, 10);
+                        if(cantitateProdus < 0){
+                            cout<<"Cantitatea produsului nu poate fi negativa"<<endl;
+                            cantitateOK= false;
+                        }
+                    }
+                    catch (...)
+                    {
+                        cout<<"Cantitatea trebuie sa fie formata doar din cifre"<<endl;
+                        cantitateOK = false;
+                    }
                     cuvant.erase();
                 } else if (nrElem == 3) {
-                    pretProdus = stof(cuvant, nullptr);
+                    try
+                    {
+                        pretProdus = stof(cuvant);
+                        if(pretProdus < 0){
+                            cout<<"Pretul nu poate fi negativ"<<endl;
+                            pretOK = false;
+                        }
+                    }
+                    catch (...)
+                    {
+                        cout<<"Pretul trebuie sa fie format doar din cifre"<<endl;
+                        pretOK = false;
+                    }
                     cuvant.erase();
                 }
             }
         }
-
-        produsNou->SetNumeProdus(numeProdus);
-        produsNou->SetPretProdus(pretProdus);
-        produsNou->SetCantitateProdus(cantitateProdus);
-        produsNou->SetNext(NULL);
-        if (this->_HEAD != NULL) {
-            Produs *produsCurent = this->_HEAD;
-            while (produsCurent->GetNext() != NULL) {
-                produsCurent = produsCurent->GetNext();
-            }
-            produsCurent->SetNext(produsNou);
-        } else {
-            this->_HEAD = produsNou;
+        if(codOK !=true || numeOK != true || cantitateOK != true || pretOK != true)
+        {
+            codOK=true;
+            numeOK =true;
+            pretOK = true;
+            cantitateOK = true;
         }
+        else{
+            produsNou->SetNumeProdus(numeProdus);
+            produsNou->SetPretProdus(pretProdus);
+            produsNou->SetCantitateProdus(cantitateProdus);
+            produsNou->SetNext(NULL);
+            if (this->_HEAD != NULL) {
+                Produs *produsCurent = this->_HEAD;
+                while (produsCurent->GetNext() != NULL) {
+                    produsCurent = produsCurent->GetNext();
+                }
+                produsCurent->SetNext(produsNou);
+            } else {
+                this->_HEAD = produsNou;
+            }
+        }
+
+
     }
 
     fin.close();
