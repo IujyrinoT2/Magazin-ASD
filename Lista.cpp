@@ -345,7 +345,7 @@ int Lista::TryGetCantitate(string cantitateProdus) {
 float Lista::ValideazaPret()
 {
     string pretProdus;
-    cout<<"Cantitatea produsului este: ";
+    cout<<"Pretul produsului este: ";
     cin>>pretProdus;
     cout<<endl;
     int aux = TryGetPret(pretProdus);
