@@ -1,5 +1,5 @@
 #include "Lista.h"
-#include <cstring>
+
 Lista::Lista()
 {
     this->_HEAD = new Produs;
@@ -8,25 +8,15 @@ Lista::Lista()
 
 void Lista::AdaugaProdus()
 {
-    string numeProdusNou;
-    int cantitateProdusNou;
-    float pretProdusNou;
+    string numeProdusNou = ValideazaNume();
+    int cantitateProdusNou = ValideazaCantitate();
+    float pretProdusNou = ValideazaPret();
 
-    cout << "Introduceti denumirea noului produs: ";
-    cin.clear();
-    cin.sync();
-    getline(cin, numeProdusNou);
-    cout << endl;
-    cout << "Introduceti pretul noului produs: ";
-    cin >> pretProdusNou;
-    cout << endl;
-    cout << "Introduceti cantitatea noului produs: ";
-    cin >> cantitateProdusNou;
-    cout << endl;
 
     std::cout.setstate(std::ios_base::failbit); //Opresc bufferul pt output ca functia sa nu mai afiseze text
     Produs* numeExistent = CautaProdus(numeProdusNou);
     std::cout.clear();//Repornesc bufferul pt output
+
      if(numeExistent != NULL)
      {
          std::cout<<"Produsul deja exista, doriti sa ii cresteti stocul ? (Y/N) "<<endl;
@@ -307,10 +297,85 @@ void Lista::ExportStoc() {
     cout << "\n Fisier exportat cu succes\n";
 }
 
-Lista::~Lista() {
+
+string Lista::ValideazaNume()
+{
+    string numeProdus;
+    cout<<"Introduceti numele produsului :";
+    cin.clear();
+    cin.sync();
+    getline(cin,numeProdus);
+    cout<<endl;
+    if(numeProdus.size()>255){
+        cout<<"Numele este invalid !"<<endl;
+        ValideazaNume();
+    }
+    return numeProdus;
+
+
+}
+
+int Lista::ValideazaCantitate()
+{
+    string cantitateProdus;
+    cout<<"Cantitatea produsului este: ";
+    cin>>cantitateProdus;
+    cout<<endl;
+    int aux = TryGetCantitate(cantitateProdus);
+    if(aux < 0)
+    {
+         cout<<"Cantitate nu poate fi negativa !"<<endl;
+         return ValideazaCantitate();
+    }
+    return aux;
+}
+
+int Lista::TryGetCantitate(string cantitateProdus) {
+    try
+    {
+        return stoi(cantitateProdus);
+    }
+    catch(...)
+    {
+        cout<<"Cantitatea nu poate fi formata din litere sau este prea mare !"<<endl;
+        return ValideazaCantitate();
+    }
+}
+
+float Lista::ValideazaPret()
+{
+    string pretProdus;
+    cout<<"Cantitatea produsului este: ";
+    cin>>pretProdus;
+    cout<<endl;
+    int aux = TryGetPret(pretProdus);
+    if(aux < 0)
+    {
+        cout<<"Pretul nu poate fi negativ !"<<endl;
+        return ValideazaPret();
+    }
+    return aux;
+}
+
+float Lista::TryGetPret(string pretProdus) {
+    try
+    {
+        return stof(pretProdus);
+    }
+    catch(...)
+    {
+        cout<<"Pretul nu poate fi format din litere sau este prea mare !"<<endl;
+        return ValideazaPret();
+    }
+}
+
+
+Lista::~Lista() 
+{
     Produs *n = NULL;
     Produs *c = this->_HEAD;
-    while (c != NULL) {
+    while (c != NULL) 
+    {
         n = c->GetNext();
         delete c;
         c = n;

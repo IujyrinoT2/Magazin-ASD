@@ -3,10 +3,10 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include <cstring>
 #include <vector>
 #include <fstream>
-#include <cstring>
 #include <stdlib.h>
 #include <stdio.h>
 #include "single_include/tabulate/tabulate.hpp"
