@@ -105,28 +105,37 @@ void Lista::CumparaProdus(int codProdus) {
         cout << "Nu s-a gasit produsul" << endl;
         return;
     }
-    int cantitateCumparata;
+    string cantitateCumparataString;
     cout << "Introduceti cantitatea cumparata: ";
-    cin >> cantitateCumparata;
+    cin >> cantitateCumparataString;
     cout << endl;
 
-    while (cantitateCumparata < 0) {
-        cout << "Introduceti o cantitate cumparata valida: ";
-        cin >> cantitateCumparata;
-        cout << endl;
+    try
+    {
+        int cantitateCumparata = stoi(cantitateCumparataString);
+        while (cantitateCumparata < 0) {
+            cout << "Introduceti o cantitate cumparata valida: ";
+            cin >> cantitateCumparata;
+            cout << endl;
+        }
+
+        if (!ValideazaStoc(cantitateCumparata, CautaProdus(codProdus))) {
+            cout << "Stoc insuficient" << endl;
+            return;
+        }
+
+        p->SetCantitateProdus(p->GetCantitateProdus() - cantitateCumparata);
+
+        if (!p->GetCantitateProdus()) {
+            cout << "Cantitatea acestui produs a ajuns la 0." << endl;
+            StergeProdus(codProdus);
+        }
+    }
+    catch (...)
+    {
+        cout<<"Cantitatea intordusa este prea mare sau nu este un numar"<<endl;
     }
 
-    if (!ValideazaStoc(cantitateCumparata, CautaProdus(codProdus))) {
-        cout << "Stoc insuficient" << endl;
-        return;
-    }
-
-    p->SetCantitateProdus(p->GetCantitateProdus() - cantitateCumparata);
-
-    if (!p->GetCantitateProdus()) {
-        cout << "Cantitatea acestui produs a ajuns la 0." << endl;
-        StergeProdus(codProdus);
-    }
 }
 
 Produs *Lista::CautaProdus(int codCautat) {
