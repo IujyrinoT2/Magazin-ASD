@@ -31,9 +31,11 @@ void Meniu::Dispatcher()
                 cin >> codProdus;
                 this->_stocProduse->StergeProdus(codProdus);
                 string continuam;
-                do{
-                    cout<<"Continue?(y/n)"; cin >> continuam;
-                } while (continuam != "y");
+                do
+                {
+                    cout << "Continue?(y/n)";
+                    cin >> continuam;
+                } while (continuam != "y" && continuam != "Y");
                 system("cls");
                 cout << GenereazaAfisaj() << endl;
             }
@@ -45,9 +47,11 @@ void Meniu::Dispatcher()
                 cin >> codProdus;
                 this->_stocProduse->AfiseazaProdus(this->_stocProduse->CautaProdus(codProdus));
                 string continuam;
-                do{
-                    cout<<"Continue?(y/n)"; cin >> continuam;
-                } while (continuam != "y");
+                do
+                {
+                    cout << "Continue?(y/n)";
+                    cin >> continuam;
+                } while (continuam != "y" && continuam != "Y");
                 system("cls");
                 cout << GenereazaAfisaj() << endl;
             }
@@ -59,20 +63,22 @@ void Meniu::Dispatcher()
                 cin >> codProdus;
                 this->_stocProduse->CumparaProdus(codProdus);
                 string continuam;
-                do{
-                    cout<<"Continue?(y/n)"; cin >> continuam;
-                } while (continuam != "y");
+                do
+                {
+                    cout << "Continue?(y/n)";
+                    cin >> continuam;
+                } while (continuam != "y" && continuam != "Y");
                 system("cls");
                 cout << GenereazaAfisaj() << endl;
             }
                 break;
-         /*   case 5: //Afisare produse
-            {
-                this->_stocProduse->GenereazaLista();
-                cout << endl;
-            }
-                break;
-         */
+                /*   case 5: //Afisare produse
+                   {
+                       this->_stocProduse->GenereazaLista();
+                       cout << endl;
+                   }
+                       break;
+                */
             case 5: //Modificare denumire
             {
                 Lista lista;
@@ -82,11 +88,21 @@ void Meniu::Dispatcher()
                 cin >> codProdus;
                 cout << endl;
                 string numeProdus = lista.ValideazaNume();
-                this->_stocProduse->CautaProdus(codProdus)->SetNumeProdus(numeProdus);
+                Produs *produsCautat = this->_stocProduse->CautaProdus(codProdus);
+                if (produsCautat == NULL)
+                {
+                    cout << "Eroare: Codul cautat nu a fost gasit." << endl;
+                } else
+                {
+                    this->_stocProduse->CautaProdus(codProdus)->SetNumeProdus(numeProdus);
+                    cout << "Produsul a fost actualizat cu succes." << endl;
+                }
                 string continuam;
-                do{
-                    cout<<"Continue?(y/n)"; cin >> continuam;
-                } while (continuam != "y");
+                do
+                {
+                    cout << "Continue?(y/n)";
+                    cin >> continuam;
+                } while (continuam != "y" && continuam != "Y");
                 system("cls");
                 cout << GenereazaAfisaj() << endl;
             }
@@ -99,11 +115,21 @@ void Meniu::Dispatcher()
                 cin >> codProdus;
                 cout << endl;
                 int cantitateProdus = lista.ValideazaCantitate();
-                this->_stocProduse->CautaProdus(codProdus)->SetCantitateProdus(cantitateProdus);
+                Produs *produsCautat = this->_stocProduse->CautaProdus(codProdus);
+                if (produsCautat == NULL)
+                {
+                    cout << "Eroare: Codul cautat nu a fost gasit." << endl;
+                } else
+                {
+                    this->_stocProduse->CautaProdus(codProdus)->SetCantitateProdus(cantitateProdus);
+                    cout << "Produsul a fost actualizat cu succes." << endl;
+                }
                 string continuam;
-                do{
-                    cout<<"Continue?(y/n)"; cin >> continuam;
-                } while (continuam != "y");
+                do
+                {
+                    cout << "Continue?(y/n)";
+                    cin >> continuam;
+                } while (continuam != "y" && continuam != "Y");
                 system("cls");
                 cout << GenereazaAfisaj() << endl;
             }
@@ -116,11 +142,21 @@ void Meniu::Dispatcher()
                 cin >> codProdus;
                 cout << endl;
                 float pretProdus = lista.ValideazaPret();
-                this->_stocProduse->CautaProdus(codProdus)->SetPretProdus(pretProdus);
+                Produs *produsCautat = this->_stocProduse->CautaProdus(codProdus);
+                if (produsCautat == NULL)
+                {
+                    cout << "Eroare: Codul cautat nu a fost gasit." << endl;
+                } else
+                {
+                    this->_stocProduse->CautaProdus(codProdus)->SetPretProdus(pretProdus);
+                    cout << "Produsul a fost actualizat cu succes." << endl;
+                }
                 string continuam;
-                do{
-                    cout<<"Continue?(y/n)"; cin >> continuam;
-                } while (continuam != "y");
+                do
+                {
+                    cout << "Continue?(y/n)";
+                    cin >> continuam;
+                } while (continuam != "y" && continuam != "Y");
                 system("cls");
                 cout << GenereazaAfisaj() << endl;
             }
